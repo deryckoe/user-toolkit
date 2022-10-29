@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: User Tools\n"
-"POT-Creation-Date: 2022-10-28 18:50-0300\n"
-"PO-Revision-Date: 2022-10-28 18:51-0300\n"
+"POT-Creation-Date: 2022-10-29 12:57-0300\n"
+"PO-Revision-Date: 2022-10-29 12:57-0300\n"
 "Last-Translator: \n"
 "Language-Team: DYGO Ltda.\n"
 "Language: es_ES\n"
@@ -21,50 +21,23 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 
-#: user-tools.php:53
+#: src/Admin.php:28
 msgid "Active"
 msgstr "Activo"
 
-#: user-tools.php:54 user-tools.php:165
+#: src/Admin.php:29
 msgid "Last login"
 msgstr "Último acceso"
 
-#: user-tools.php:55
+#: src/Admin.php:30
 msgid "Registered"
 msgstr "Registrado"
 
-#: user-tools.php:56
+#: src/Admin.php:31
 msgid "ID"
 msgstr "ID"
 
-#: user-tools.php:80 user-tools.php:103
-#, php-format
-msgid "%s at %s"
-msgstr "%s a las %s"
-
-#: user-tools.php:82 user-tools.php:106
-#, php-format
-msgid "%s ago"
-msgstr "hace %s"
-
-#: user-tools.php:100
-msgid "Never"
-msgstr "Nunca"
-
-#. Plugin Name of the plugin/theme
-#: user-tools.php:149
-msgid "User Tools"
-msgstr "User Tools"
-
-#: user-tools.php:153
-msgid "Login active"
-msgstr "Inicio de sesión activo"
-
-#: user-tools.php:159
-msgid "Activate user login"
-msgstr "Activar el inicio de sesión del usuario"
-
-#: user-tools.php:299
+#: src/Authentication.php:26
 msgid ""
 "<strong>Error</strong>: Username is deactivated. Please contact your manager "
 "for further information."
@@ -72,25 +45,23 @@ msgstr ""
 "<strong>Error</strong>: El  usuario está desactivado. Por favor, póngase en "
 "contacto con su administrador para obtener más información."
 
-#: user-tools.php:326
-msgid "All"
-msgstr "Todos"
+#: src/User.php:18
+msgid "Never"
+msgstr "Nunca"
 
-#: user-tools.php:326
-msgid "Login status"
-msgstr "Modo de acceso"
+#: src/User.php:21 src/User.php:35
+#, php-format
+msgid "%s at %s"
+msgstr "%s a las %s"
 
-#: user-tools.php:332
-msgid "All login status"
-msgstr "Todos los estados de login"
+#: src/User.php:23 src/User.php:37
+#, php-format
+msgid "%s ago"
+msgstr "hace %s"
 
-#: user-tools.php:335
-msgid "Enabled (Active)"
-msgstr "Activado"
-
-#: user-tools.php:336
-msgid "Disabled"
-msgstr "Desactivado"
+#. Plugin Name of the plugin/theme
+msgid "User Tools"
+msgstr "User Tools"
 
 #. Plugin URI of the plugin/theme
 msgid "https://deryckoe.com/user-tools"
@@ -107,6 +78,27 @@ msgstr "Deryck Oñate"
 #. Author URI of the plugin/theme
 msgid "http://deryckoe.com"
 msgstr "http://deryckoe.com"
+
+#~ msgid "Login active"
+#~ msgstr "Inicio de sesión activo"
+
+#~ msgid "Activate user login"
+#~ msgstr "Activar el inicio de sesión del usuario"
+
+#~ msgid "All"
+#~ msgstr "Todos"
+
+#~ msgid "Login status"
+#~ msgstr "Modo de acceso"
+
+#~ msgid "All login status"
+#~ msgstr "Todos los estados de login"
+
+#~ msgid "Enabled (Active)"
+#~ msgstr "Activado"
+
+#~ msgid "Disabled"
+#~ msgstr "Desactivado"
 
 #~ msgid "All logins"
 #~ msgstr "Estado de acceso"

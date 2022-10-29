@@ -6,5 +6,5 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
-    'Deryck\\UserTools\\' => array($baseDir . '/src'),
+    'UserTools\\' => array($baseDir . '/src'),
 );
