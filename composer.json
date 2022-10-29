@@ -1,0 +1,17 @@
+{
+    "name": "deryck/user-tools",
+    "type": "project",
+    "license": "GNU",
+    "autoload": {
+        "psr-4": {
+            "UserTools\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "deryck",
+            "email": "deryck@dygo.cl"
+        }
+    ],
+    "require": {}
+}
