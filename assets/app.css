@@ -1,0 +1,41 @@
+.manage-column.column-can_login {
+    width: 55px;
+}
+
+.manage-column.column-id {
+    width: 100px;
+}
+
+.ut-toggle {
+    border: 1px solid #dedede;
+    padding: 2px;
+    width: 32px;
+    border-radius: 200px;
+    background-color: #f0f0f0;
+    transition: all 600ms ease-in-out;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.ut-toggle:hover {
+    background-color: #f6f6f6;
+    cursor: pointer;
+}
+
+.ut-toggle[data-active="1"] {
+    background-color: #6397d7;
+    justify-content: flex-start;
+}
+
+.ut-toggle .switch {
+    width: 14px;
+    height: 14px;
+    border: 1px solid #dedede;
+    border-radius: 500px;
+    background-color: #fff;
+    transition: all 1s ease-in-out;
+}
+
+.ut-toggle[data-active="1"] .switch {
+    border-color: #6397d7;
+}
