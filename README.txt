@@ -1,47 +1,49 @@
-=== Image Carousel Addon for Beaver Builder ===
+=== User Tools ===
 Contributors: deryck
-Donate link: http://deryckoe.com/image-carousel-addon-for-beaver-builder
-Tags: beaver addons, beaver builder, beaver builder add ons, beaver builder free, beaver builder image carousel, image carousel
-Requires at least: 4.9.5
-Tested up to: 5.0.3
-Requires PHP: 5.6
-Stable tag: 1.0.1
+Donate link: http://deryckoe.com/user-toolkit
+Tags: user, user-tools, user-toolkit, last-login, registered-date, user-id, disable-users
+Requires at least: 5.9.5
+Tested up to: 6.1
+Requires PHP: 7.4
+Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-A quick and easy responsive image carousel module for Beaver Builder.
+The missing user tools and activity data that you need and don't have by default.
 
 == Description ==
 
-Image Carousel Addon form Beaver Builder makes easy the creation of an horizontal image carousel without the hazzle of hacking standard Beaver Builder modules.
-
-You can simply add images, with optional links and that's it. You can also tweak carousel behaviour changing minimun an maximun slides to display on screen. Slides width and width behaviour. Transition speed and controls visibility.
+User Tools adds missing features to user management, such as basic user activities, including last login and registration dates. You can deactivate users without deleting them, allowing you to maintain your ownership of past user activity and content.
 
 == Installation ==
 
-1. Upload `bb-image-carousel` to the `/wp-content/plugins/` directory or install directly through the plugin installer
-2. Activate the plugin through the 'Plugins' menu in WordPress or by using the link provided by the plugin installer
-3. Create or edit a page using Beaver Builder
-4. Add Image Carousel module, located in Add-ons section
+1. Upload `user-toolkit` to the `/wp-content/plugins/` directory or install directly through the plugin installer.
+2. Activate the plugin through the 'Plugins' menu in WordPress or by using the link provided by the plugin installer.
+3. Disable any extra column you don't want, using Screen Options in the Users screen.
+4. Enable or disable any user login access in the Users screen or in the User Edit screen.
 
 == Frequently Asked Questions ==
 
-= Will this module impact on website performance? =
+= Will this plugin deactivate all users login by default? =
 
-Image Carousel uses bxSlider, the standard Beaver Builder slider script. It will not load any extra scripts so the performace remains exactly as it is before adding the Image Carousel to your page.
+No. All users will remain active by default. You select what users do you want to deactivate.
+
+= Last Login dates will be displayed as soon as I activate User Tools? =
+
+No. WordPress does not have that information. It's introduced with the plugin so will be tracked as soon as you enable it. However, we are working to have the last activity of the user available as soon as the plugin is activated, even if the user has not logged in yet.
 
 == Screenshots ==
 
-1. PLugin details for activation.
-2. Image Carousel Module location in Beaver Builder modules.
-3. General configuration options.
-4. Content configuration overview.
-5. Editing content image with optional link.
+1. Login activation/deactivation, Registration date, Last Login date and ID columns.
+2. Filter by login status.
+3. Login status, registration and last login dates in user profile.
 
 == Changelog ==
 
 = 1.0.0 =
 * Initial Release
 
-= 1.0.1 =
-* Link target "_blank" setting now works
+== Upgrade Notice ==
+
+= 1.0.0 =
+Last Login, Registration Date and disable user login without deleting him.

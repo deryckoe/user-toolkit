@@ -4,7 +4,7 @@
     "license": "GNU",
     "autoload": {
         "psr-4": {
-            "UserTools\\": "src/"
+            "UserToolkit\\": "src/"
         }
     },
     "authors": [

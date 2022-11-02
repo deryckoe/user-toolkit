@@ -1,6 +1,6 @@
 <?php
 
-namespace UserTools;
+namespace UserToolkit;
 
 use function UserTools;
 
@@ -23,16 +23,16 @@ class Admin {
 		add_action( 'edit_user_profile_update', [ $this, 'saveUserFields' ] );
 	}
 
-	function columnHeaders( $columns ): array {
+	public function columnHeaders( $columns ): array {
 		return array_merge( $columns, [
-			'can_login'  => __( 'Active', 'user-tools' ),
-			'last_login' => __( 'Last login', 'user-tools' ),
-			'registered' => __( 'Registered', 'user-tools' ),
-			'id'         => __( 'ID', 'user-tools' ),
+			'can_login'  => __( 'Active', 'user-toolkit' ),
+			'last_login' => __( 'Last login', 'user-toolkit' ),
+			'registered' => __( 'Registered', 'user-toolkit' ),
+			'id'         => __( 'ID', 'user-toolkit' ),
 		] );
 	}
 
-	function columnContent( $value, $column, $user_id ) {
+	public function columnContent( $value, $column, $user_id ) {
 
 		switch ( $column ) {
 			case 'last_login':
@@ -41,11 +41,9 @@ class Admin {
 			case 'can_login':
                 $active = UserTools()->user( $user_id )->canLogin();
 
-				return <<<HTML
-					<div class="ut-toggle" data-active="$active" data-user-id="$user_id">
-						<div class="switch"></div>
-					</div>
-				HTML;
+				return '<div class="ut-toggle" data-active="' .$active . '" data-user-id="' . $user_id .'">
+						    <div class="switch"></div>
+					    </div>';
 
 			case 'registered':
                 return UserTools()->user( $user_id )->registered();
@@ -87,19 +85,19 @@ class Admin {
 	public function columnFilters() {
 
 		$can_login = $_GET['can_login'] ?? '';
-		$all_label = isset( $_GET['can_login'] ) && $_GET['can_login'] !== '-1' ? __( 'All', 'user-tools' ) : __( 'Login status', 'user-tools' )
+		$all_label = isset( $_GET['can_login'] ) && $_GET['can_login'] !== '-1' ? __( 'All', 'user-toolkit' ) : __( 'Login status', 'user-toolkit' )
 
 		?>
 
         <div class="alignleft actions">
             <form method="get">
-                <label class="screen-reader-text" for="can_login"><?php _e( 'All login status', 'user-tools' ) ?></label>
+                <label class="screen-reader-text" for="can_login"><?php _e( 'All login status', 'user-toolkit' ) ?></label>
                 <select name="can_login" id="can_login">
                     <option value="-1"><?php echo $all_label ?></option>
-                    <option value="1" <?php selected( $can_login, 1 ) ?>><?php _e( 'Enabled (Active)', 'user-tools' ) ?></option>
-                    <option value="0"<?php selected( $can_login, 0 ) ?>><?php _e( 'Disabled', 'user-tools' ) ?></option>
+                    <option value="1" <?php selected( $can_login, 1 ) ?>><?php _e( 'Enabled (Active)', 'user-toolkit' ) ?></option>
+                    <option value="0"<?php selected( $can_login, 0 ) ?>><?php _e( 'Disabled', 'user-toolkit' ) ?></option>
                 </select>
-                <input type="submit" class="button action" value="<?php _e('Filter' ) ?>">
+                <input type="submit" class="button action" value="<?php _e('Filter', 'user-toolkit' ) ?>">
             </form>
         </div>
 		<?php
@@ -136,26 +134,25 @@ class Admin {
 		$query->set( 'meta_query', $meta_query );
 	}
 
-
 	public function userProfileFields( $user ) {
 		?>
-        <h2><?php _e( 'User Tools', 'user-tools' ) ?></h2>
+        <h2><?php _e( 'User Tools', 'user-toolkit' ) ?></h2>
         <table class="form-table">
 			<?php if ( current_user_can( 'edit_user' ) ) : ?>
                 <tr>
-                    <th scope="row"><?php _e( 'Login active', 'user-tools' ) ?></th>
+                    <th scope="row"><?php _e( 'Login active', 'user-toolkit' ) ?></th>
                     <td>
                         <div class="time_wrapper">
                             <label for="can_login">
                                 <input name="can_login" type="checkbox" id="can_login"
                                        value="1" <?php checked( UserTools()->user( $user->ID )->canLogin(), 1 ) ?>>
-								<?php _e( 'Activate user login', 'user-tools' ) ?></label>
+								<?php _e( 'Activate user login', 'user-toolkit' ) ?></label>
                         </div>
                     </td>
                 </tr>
 			<?php endif; ?>
             <tr>
-                <th scope="row"><label><?php _e( 'Registered', 'user-tools' ) ?></label></th>
+                <th scope="row"><label><?php _e( 'Registered', 'user-toolkit' ) ?></label></th>
                 <td>
                     <div class="time_wrapper">
 						<?php echo UserTools()->user($user->ID)->registered(); ?>
@@ -163,7 +160,7 @@ class Admin {
                 </td>
             </tr>
             <tr>
-                <th scope="row"><label><?php _e( 'Last login', 'user-tools' ) ?></label></th>
+                <th scope="row"><label><?php _e( 'Last login', 'user-toolkit' ) ?></label></th>
                 <td>
                     <div class="time_wrapper">
 						<?php echo UserTools()->user($user->ID)->lastLogin(); ?>
@@ -185,6 +182,5 @@ class Admin {
 
 		return true;
 	}
-
 
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace UserTools;
+namespace UserToolkit;
 
 class Authentication {
 
@@ -20,10 +20,10 @@ class Authentication {
 			return $user;
 		}
 
-		$can_login = ut_can_user_login( $user->ID );
+		$can_login = UserTools()->user( $user->ID )->canLogin();
 
 		if ( $can_login != 1 ) {
-			$user = new \WP_Error( 'authentication_deactivated', __( '<strong>Error</strong>: Username is deactivated. Please contact your manager for further information.', 'user-tools' ) );
+			$user = new \WP_Error( 'authentication_deactivated', __( '<strong>Error</strong>: Username is deactivated. Please contact your manager for further information.', 'user-toolkit' ) );
 		}
 
 		return $user;

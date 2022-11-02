@@ -1,6 +1,6 @@
 <?php
 
-namespace UserTools;
+namespace UserToolkit;
 
 class RestEndpoints {
 

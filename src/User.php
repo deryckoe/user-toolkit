@@ -1,6 +1,6 @@
 <?php
 
-namespace UserTools;
+namespace UserToolkit;
 
 class User {
 
@@ -15,12 +15,12 @@ class User {
 		$date                 = wp_date( UT_DATE_FORMAT, $last_login_timestamp, wp_timezone() );
 		$time                 = wp_date( UT_TIME_FORMAT, $last_login_timestamp, wp_timezone() );
 
-		$last_login = __( 'Never', 'user-tools' );
+		$last_login = __( 'Never', 'user-toolkit' );
 
 		if ( ! empty( $last_login_timestamp ) ) {
-			$last_login = '<span class="time_formatted">' . sprintf( __( '%s at %s', 'user-tools' ), $date, $time ) . '</span>';
+			$last_login = '<span class="time_formatted">' . sprintf( __( '%s at %s', 'user-toolkit' ), $date, $time ) . '</span>';
 			$human      = human_time_diff( $last_login_timestamp, current_time( 'timestamp', true ) );
-			$last_login .= '<br><span class="time_diff">' . sprintf( __( '%s ago', 'user-tools' ), $human ) . '</span>';
+			$last_login .= '<br><span class="time_diff">' . sprintf( __( '%s ago', 'user-toolkit' ), $human ) . '</span>';
 		}
 
 		return $last_login;
@@ -32,9 +32,9 @@ class User {
 		$date = wp_date( UT_DATE_FORMAT, strtotime( $user->user_registered ), wp_timezone() );
 		$time = wp_date( UT_TIME_FORMAT, strtotime( $user->user_registered ), wp_timezone() );
 
-		$registered = '<span class="time_formatted">' . sprintf( __( '%s at %s', 'user-tools' ), $date, $time ) . '</span>';
+		$registered = '<span class="time_formatted">' . sprintf( __( '%s at %s', 'user-toolkit' ), $date, $time ) . '</span>';
 		$human      = human_time_diff( strtotime( $user->user_registered ), current_time( 'timestamp', true ) );
-		$registered .= '<br><span class="time_diff">' . sprintf( __( '%s ago', 'user-tools' ), $human ) . '</span>';
+		$registered .= '<br><span class="time_diff">' . sprintf( __( '%s ago', 'user-toolkit' ), $human ) . '</span>';
 
 		return $registered;
 	}
