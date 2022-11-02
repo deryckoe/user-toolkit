@@ -42,8 +42,8 @@ class UserTools {
 	}
 
 	function assets() {
-		wp_enqueue_script( 'user-toolkit', UT_URL . 'assets/app.js', [ 'wp-api' ], UT_VERSION, true );
-		wp_enqueue_style( 'user-toolkit', UT_URL . 'assets/app.css', [], UT_VERSION );
+		wp_enqueue_script( 'user-toolkit', UT_URL . 'assets/dist/app.js', [ 'wp-api' ], UT_VERSION, true );
+		wp_enqueue_style( 'user-toolkit', UT_URL . 'assets/dist/app.css', [], UT_VERSION );
 	}
 
 }
