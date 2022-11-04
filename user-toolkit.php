@@ -2,14 +2,13 @@
 /**
  *
  * @link              https://deryckoe.com/user-toolkit
- * @since             1.0.0
  * @package           User_Toolkit
  *
  * @wordpress-plugin
  * Plugin Name:       User Toolkit
  * Plugin URI:        https://deryckoe.com/user-toolkit
  * Description:       The missing user tools and activity data that you need and don't have by default.
- * Version:           1.0.0
+ * Version:           1.0.1
  * Author:            Deryck Oñate
  * Author URI:        http://deryckoe.com
  * License:           GPL-2.0+

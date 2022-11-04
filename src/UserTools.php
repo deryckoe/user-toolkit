@@ -4,7 +4,7 @@ namespace UserToolkit;
 
 class UserTools {
 
-	private static ?self $instance = null;
+	private static $instance = null;
 
 	public function __construct() {
 

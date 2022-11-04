@@ -4,7 +4,7 @@ Donate link: http://deryckoe.com/user-toolkit
 Tags: user, user-tools, user-toolkit, last-login, registered-date, user-id, disable-users
 Requires at least: 5.9.5
 Tested up to: 6.1
-Requires PHP: 7.4
+Requires PHP: 7.3
 Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -43,7 +43,13 @@ No. WordPress does not have that information. It's introduced with the plugin so
 = 1.0.0 =
 * Initial Release
 
+= 1.0.1 =
+* Downgraded to support PHP 7.3
+
 == Upgrade Notice ==
 
 = 1.0.0 =
 Last Login, Registration Date and disable user login without deleting him.
+
+= 1.0.1 =
+Downgraded to support PHP 7.3
