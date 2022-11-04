@@ -5,7 +5,7 @@ Tags: user, user-tools, user-toolkit, last-login, registered-date, user-id, disa
 Requires at least: 5.9.5
 Tested up to: 6.1
 Requires PHP: 7.3
-Stable tag: 1.0.0
+Stable tag: 1.0.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -46,6 +46,9 @@ No. WordPress does not have that information. It's introduced with the plugin so
 = 1.0.1 =
 * Downgraded to support PHP 7.3
 
+= 1.0.1 =
+* Ability to migrate last login data from When Last Login and Ultimate Member plugins
+
 == Upgrade Notice ==
 
 = 1.0.0 =
@@ -53,3 +56,7 @@ Last Login, Registration Date and disable user login without deleting him.
 
 = 1.0.1 =
 Downgraded to support PHP 7.3
+
+= 1.0.2 =
+Ability to migrate last login data from When Last Login and Ultimate Member plugins
+
