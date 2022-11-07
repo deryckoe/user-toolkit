@@ -46,8 +46,11 @@ No. WordPress does not have that information. It's introduced with the plugin so
 = 1.0.1 =
 * Downgraded to support PHP 7.3
 
-= 1.0.1 =
+= 1.0.2 =
 * Ability to migrate last login data from When Last Login and Ultimate Member plugins
+
+= 1.0.3 =
+* Stability and security improvements
 
 == Upgrade Notice ==
 
@@ -58,5 +61,8 @@ Last Login, Registration Date and disable user login without deleting him.
 Downgraded to support PHP 7.3
 
 = 1.0.2 =
-Ability to migrate last login data from When Last Login and Ultimate Member plugins
+Support for switching from plugins like When Last Login and Ultimate Member
+
+= 1.0.3 =
+Improve security and performance
 
