@@ -6,5 +6,5 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
-    'USRTK\\UserToolkit\\' => array($baseDir . '/src'),
+    'UserToolkit\\' => array($baseDir . '/src'),
 );

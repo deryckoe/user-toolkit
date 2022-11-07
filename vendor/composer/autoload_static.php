@@ -9,12 +9,12 @@ class ComposerStaticInitbe4390766bebc1754807e8da6ee26f25
     public static $prefixLengthsPsr4 = array (
         'U' => 
         array (
-            'USRTK\\UserToolkit\\' => 18,
+            'UserToolkit\\' => 12,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'USRTK\\UserToolkit\\' => 
+        'UserToolkit\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
         ),

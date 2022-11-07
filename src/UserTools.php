@@ -1,6 +1,6 @@
 <?php
 
-namespace USRTK\UserToolkit;
+namespace UserToolkit;
 
 class UserTools {
 
