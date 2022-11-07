@@ -1,6 +1,6 @@
 <?php
 
-namespace DOE\UserToolkit;
+namespace USRTK\UserToolkit;
 
 class User {
 

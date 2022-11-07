@@ -1,6 +1,6 @@
 <?php
 
-namespace DOE\UserToolkit;
+namespace USRTK\UserToolkit;
 
 use function USRTK_UserTools;
 

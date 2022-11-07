@@ -41,7 +41,7 @@ load_plugin_textdomain( 'user-toolkit', false, USRTK_LANGUAGES_DIR . '/languages
 // Composer autoload
 require __DIR__ . '/vendor/autoload.php';
 
-use DOE\UserToolkit\UserTools;
+use USRTK\UserToolkit\UserTools;
 
 function USRTK_UserTools(): UserTools {
 	return UserTools::instance();
