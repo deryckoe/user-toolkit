@@ -6,5 +6,5 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
-    'UserToolkit\\' => array($baseDir . '/src'),
+    'DOE\\UserToolkit\\' => array($baseDir . '/src'),
 );

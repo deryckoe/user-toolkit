@@ -1,6 +1,6 @@
 <?php
 
-namespace UserToolkit;
+namespace DOE\UserToolkit;
 
 class Authentication {
 

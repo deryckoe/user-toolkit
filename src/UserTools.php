@@ -1,14 +1,10 @@
 <?php
 
-namespace UserToolkit;
+namespace DOE\UserToolkit;
 
 class UserTools {
 
 	private static $instance = null;
-
-	public function __construct() {
-
-	}
 
 	public static function instance(): self {
 		return self::$instance = self::$instance ?? new self();

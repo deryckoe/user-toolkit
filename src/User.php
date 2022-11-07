@@ -1,6 +1,6 @@
 <?php
 
-namespace UserToolkit;
+namespace DOE\UserToolkit;
 
 class User {
 
@@ -14,16 +14,16 @@ class User {
 	public function lastLogin(): ?string {
 		$last_login_timestamp = get_user_meta( $this->user_id, 'last_login', true );
 
-		if ( !empty( $last_login_timestamp) ) {
+		if ( empty( $last_login_timestamp ) ) {
 			$last_login_timestamp = get_user_meta( $this->user_id, 'when_last_login', true );
 		}
 
-		if ( !empty( $last_login_timestamp) ) {
+		if ( empty( $last_login_timestamp ) ) {
 			$last_login_timestamp = get_user_meta( $this->user_id, '_um_last_login', true );
 		}
 
-		$date                 = wp_date( USRTK_DATE_FORMAT, $last_login_timestamp, wp_timezone() );
-		$time                 = wp_date( USRTK_TIME_FORMAT, $last_login_timestamp, wp_timezone() );
+		$date = wp_date( USRTK_DATE_FORMAT, $last_login_timestamp, wp_timezone() );
+		$time = wp_date( USRTK_TIME_FORMAT, $last_login_timestamp, wp_timezone() );
 
 		$last_login = __( 'Never', 'user-toolkit' );
 

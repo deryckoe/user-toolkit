@@ -1,8 +1,8 @@
 <?php
 
-namespace UserToolkit;
+namespace DOE\UserToolkit;
 
-use function UserTools;
+use function USRTK_UserTools;
 
 class Admin {
 
@@ -142,7 +142,7 @@ class Admin {
 		?>
         <h2><?php _e( 'User Tools', 'user-toolkit' ) ?></h2>
         <table class="form-table">
-			<?php if ( current_user_can( 'edit_user' ) ) : ?>
+			<?php if ( current_user_can( 'edit_user' ) && $user->ID !== get_current_user_id() ) : ?>
                 <tr>
                     <th scope="row"><?php _e( 'Login active', 'user-toolkit' ) ?></th>
                     <td>
@@ -180,7 +180,7 @@ class Admin {
 			return false;
 		}
 
-		$can_login = isset( $_GET['can_login'] ) ? sanitize_text_field( $_GET['can_login'] ) : '0';
+		$can_login = isset( $_POST['can_login'] ) ? sanitize_text_field( $_POST['can_login'] ) : '0';
 
 		if ( ! in_array( $can_login, [ '0', '1' ] ) ) {
 			return false;
