@@ -36,17 +36,17 @@ class Admin {
 
 		switch ( $column ) {
 			case 'last_login':
-                return UserTools()->user( $user_id )->lastLogin();
+				return UserTools()->user( $user_id )->lastLogin();
 
 			case 'can_login':
-                $active = UserTools()->user( $user_id )->canLogin();
+				$active = UserTools()->user( $user_id )->canLogin();
 
-				return '<div class="ut-toggle" data-active="' .$active . '" data-user-id="' . $user_id .'">
+				return '<div class="ut-toggle" data-active="' . $active . '" data-user-id="' . $user_id . '">
 						    <div class="switch"></div>
 					    </div>';
 
 			case 'registered':
-                return UserTools()->user( $user_id )->registered();
+				return UserTools()->user( $user_id )->registered();
 			case 'id':
 
 				return $user_id;
@@ -84,20 +84,22 @@ class Admin {
 
 	public function columnFilters() {
 
-		$can_login = $_GET['can_login'] ?? '';
-		$all_label = isset( $_GET['can_login'] ) && $_GET['can_login'] !== '-1' ? __( 'All', 'user-toolkit' ) : __( 'Login status', 'user-toolkit' )
+		$can_login = isset( $_GET['can_login'] ) ? sanitize_text_field( $_GET['can_login'] ) : '';
+
+		$all_label = isset( $can_login ) && $can_login !== '-1' ? __( 'All', 'user-toolkit' ) : __( 'Login status', 'user-toolkit' )
 
 		?>
 
         <div class="alignleft actions">
             <form method="get">
-                <label class="screen-reader-text" for="can_login"><?php _e( 'All login status', 'user-toolkit' ) ?></label>
+                <label class="screen-reader-text"
+                       for="can_login"><?php _e( 'All login status', 'user-toolkit' ) ?></label>
                 <select name="can_login" id="can_login">
                     <option value="-1"><?php echo $all_label ?></option>
                     <option value="1" <?php selected( $can_login, 1 ) ?>><?php _e( 'Enabled (Active)', 'user-toolkit' ) ?></option>
                     <option value="0"<?php selected( $can_login, 0 ) ?>><?php _e( 'Disabled', 'user-toolkit' ) ?></option>
                 </select>
-                <input type="submit" class="button action" value="<?php _e('Filter', 'user-toolkit' ) ?>">
+                <input type="submit" class="button action" value="<?php _e( 'Filter', 'user-toolkit' ) ?>">
             </form>
         </div>
 		<?php
@@ -115,18 +117,20 @@ class Admin {
 			return;
 		}
 
-		if ( isset( $_GET['can_login'] ) && ! in_array( $_GET['can_login'], [ '0', '1' ] ) ) {
+		$can_login = isset( $_GET['can_login'] ) ? sanitize_text_field( $_GET['can_login'] ) : '';
+
+		if ( empty( $can_login ) ) {
 			return;
 		}
 
-		if ( ! isset( $_GET['can_login'] ) ) {
+		if ( in_array( $_GET['can_login'], [ '0', '1' ] ) ) {
 			return;
 		}
 
 		$meta_query = [
 			[
 				'key'     => 'can_login',
-				'value'   => $_GET['can_login'],
+				'value'   => $can_login,
 				'compare' => '='
 			]
 		];
@@ -155,7 +159,7 @@ class Admin {
                 <th scope="row"><label><?php _e( 'Registered', 'user-toolkit' ) ?></label></th>
                 <td>
                     <div class="time_wrapper">
-						<?php echo UserTools()->user($user->ID)->registered(); ?>
+						<?php echo UserTools()->user( $user->ID )->registered(); ?>
                     </div>
                 </td>
             </tr>
@@ -163,7 +167,7 @@ class Admin {
                 <th scope="row"><label><?php _e( 'Last login', 'user-toolkit' ) ?></label></th>
                 <td>
                     <div class="time_wrapper">
-						<?php echo UserTools()->user($user->ID)->lastLogin(); ?>
+						<?php echo UserTools()->user( $user->ID )->lastLogin(); ?>
                     </div>
                 </td>
             </tr>
@@ -176,9 +180,13 @@ class Admin {
 			return false;
 		}
 
-		$value = $_POST['can_login'] ?? '0';
+		$can_login = isset( $_GET['can_login'] ) ? sanitize_text_field( $_GET['can_login'] ) : '0';
 
-		update_user_meta( $user_id, 'can_login', $value );
+		if ( ! in_array( $can_login, [ '0', '1' ] ) ) {
+			return false;
+		}
+
+		update_user_meta( $user_id, 'can_login', $can_login );
 
 		return true;
 	}
