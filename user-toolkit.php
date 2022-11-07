@@ -25,26 +25,26 @@ if ( ! defined( 'WPINC' ) ) {
 /**
  * Currently plugin version.
  */
-define( 'UT_VERSION', '1.0.2' );
+define( 'USRTK_VERSION', '1.0.2' );
 
 /**
  * Plugin paths
  */
-define( 'UT_DIR', plugin_dir_path( __FILE__ ) );
-define( 'UT_URL', plugins_url( '/', __FILE__ ) );
-define( 'UT_LANGUAGES_DIR', basename( dirname( __FILE__ ) ) );
-define( 'UT_DATE_FORMAT', 'd/m/Y' );
-define( 'UT_TIME_FORMAT', 'g:i a' );
+define( 'USRTK_DIR', plugin_dir_path( __FILE__ ) );
+define( 'USRTK_URL', plugins_url( '/', __FILE__ ) );
+define( 'USRTK_LANGUAGES_DIR', basename( dirname( __FILE__ ) ) );
+define( 'USRTK_DATE_FORMAT', 'd/m/Y' );
+define( 'USRTK_TIME_FORMAT', 'g:i a' );
 
-load_plugin_textdomain( 'user-toolkit', false, UT_LANGUAGES_DIR . '/languages' );
+load_plugin_textdomain( 'user-toolkit', false, USRTK_LANGUAGES_DIR . '/languages' );
 
 // Composer autoload
 require __DIR__ . '/vendor/autoload.php';
 
 use UserToolkit\UserTools;
 
-function UserTools(): UserTools {
+function USRTK_UserTools(): UserTools {
 	return UserTools::instance();
 }
 
-UserTools()->init();
+USRTK_UserTools()->init();

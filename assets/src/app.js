@@ -1,4 +1,5 @@
 import './app.scss';
+import {resize} from "../../../../../wp-includes/js/codemirror/csslint";
 
 document.addEventListener("DOMContentLoaded", function (event) {
 
@@ -7,13 +8,19 @@ document.addEventListener("DOMContentLoaded", function (event) {
     ut_toggle.forEach(function (element) {
         element.addEventListener('click', function () {
 
-            if (element.dataset.active === '1') {
+            const prev_value = element.dataset.active;
+
+            if (prev_value === '1') {
                 element.dataset.active = '0';
             } else {
                 element.dataset.active = '1';
             }
 
-            updateUserStatus(element);
+            updateUserStatus(element).then((e) => {
+                element.dataset.active = e.can_login;
+            }, (e) => {
+                element.dataset.active = prev_value;
+            });
 
         })
 
@@ -23,7 +30,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 });
 
 function updateUserStatus(element) {
-    fetch(wpApiSettings.root + wpApiSettings.versionString + "users/" + element.dataset.userId, {
+    return fetch(wpApiSettings.root + wpApiSettings.versionString + "users/" + element.dataset.userId, {
         method: "POST",
         headers: {
             "X-WP-Nonce": wpApiSettings.nonce,
@@ -33,8 +40,15 @@ function updateUserStatus(element) {
             can_login: element.dataset.active,
         }),
     })
-        .then(res => res.json())
-        .then(result => {
-            console.log(result);
+        .then((response) => {
+
+            if ( ! response.ok ) {
+                throw new Error(response.status + ': ' + response.statusText);
+            }
+
+            return response.json()
+        })
+        .catch(result => {
+            return Promise.reject(result);
         });
 }

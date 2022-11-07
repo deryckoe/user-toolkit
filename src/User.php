@@ -22,8 +22,8 @@ class User {
 			$last_login_timestamp = get_user_meta( $this->user_id, '_um_last_login', true );
 		}
 
-		$date                 = wp_date( UT_DATE_FORMAT, $last_login_timestamp, wp_timezone() );
-		$time                 = wp_date( UT_TIME_FORMAT, $last_login_timestamp, wp_timezone() );
+		$date                 = wp_date( USRTK_DATE_FORMAT, $last_login_timestamp, wp_timezone() );
+		$time                 = wp_date( USRTK_TIME_FORMAT, $last_login_timestamp, wp_timezone() );
 
 		$last_login = __( 'Never', 'user-toolkit' );
 
@@ -39,8 +39,8 @@ class User {
 	public function registered(): string {
 		$user = get_user_by( 'id', $this->user_id );
 
-		$date = wp_date( UT_DATE_FORMAT, strtotime( $user->user_registered ), wp_timezone() );
-		$time = wp_date( UT_TIME_FORMAT, strtotime( $user->user_registered ), wp_timezone() );
+		$date = wp_date( USRTK_DATE_FORMAT, strtotime( $user->user_registered ), wp_timezone() );
+		$time = wp_date( USRTK_TIME_FORMAT, strtotime( $user->user_registered ), wp_timezone() );
 
 		$registered = '<span class="time_formatted">' . sprintf( __( '%s at %s', 'user-toolkit' ), $date, $time ) . '</span>';
 		$human      = human_time_diff( strtotime( $user->user_registered ), current_time( 'timestamp', true ) );

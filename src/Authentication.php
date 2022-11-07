@@ -20,7 +20,7 @@ class Authentication {
 			return $user;
 		}
 
-		$can_login = UserTools()->user( $user->ID )->canLogin();
+		$can_login = USRTK_UserTools()->user( $user->ID )->canLogin();
 
 		if ( $can_login != 1 ) {
 			$user = new \WP_Error( 'authentication_deactivated', __( '<strong>Error</strong>: Username is deactivated. Please contact your manager for further information.', 'user-toolkit' ) );
@@ -30,7 +30,7 @@ class Authentication {
 	}
 
 	public function registerUserMeta( $user_id ) {
-		$value = get_option( 'ut_can_login', '1' );
+		$value = get_option( 'usrtk_can_login', '1' );
 		update_user_meta( $user_id, 'can_login', $value );
 	}
 

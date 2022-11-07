@@ -36,17 +36,17 @@ class Admin {
 
 		switch ( $column ) {
 			case 'last_login':
-				return UserTools()->user( $user_id )->lastLogin();
+				return USRTK_UserTools()->user( $user_id )->lastLogin();
 
 			case 'can_login':
-				$active = UserTools()->user( $user_id )->canLogin();
+				$active = USRTK_UserTools()->user( $user_id )->canLogin();
 
 				return '<div class="ut-toggle" data-active="' . $active . '" data-user-id="' . $user_id . '">
 						    <div class="switch"></div>
 					    </div>';
 
 			case 'registered':
-				return UserTools()->user( $user_id )->registered();
+				return USRTK_UserTools()->user( $user_id )->registered();
 			case 'id':
 
 				return $user_id;
@@ -149,7 +149,7 @@ class Admin {
                         <div class="time_wrapper">
                             <label for="can_login">
                                 <input name="can_login" type="checkbox" id="can_login"
-                                       value="1" <?php checked( UserTools()->user( $user->ID )->canLogin(), 1 ) ?>>
+                                       value="1" <?php checked( USRTK_UserTools()->user( $user->ID )->canLogin(), 1 ) ?>>
 								<?php _e( 'Activate user login', 'user-toolkit' ) ?></label>
                         </div>
                     </td>
@@ -159,7 +159,7 @@ class Admin {
                 <th scope="row"><label><?php _e( 'Registered', 'user-toolkit' ) ?></label></th>
                 <td>
                     <div class="time_wrapper">
-						<?php echo UserTools()->user( $user->ID )->registered(); ?>
+						<?php echo USRTK_UserTools()->user( $user->ID )->registered(); ?>
                     </div>
                 </td>
             </tr>
@@ -167,7 +167,7 @@ class Admin {
                 <th scope="row"><label><?php _e( 'Last login', 'user-toolkit' ) ?></label></th>
                 <td>
                     <div class="time_wrapper">
-						<?php echo UserTools()->user( $user->ID )->lastLogin(); ?>
+						<?php echo USRTK_UserTools()->user( $user->ID )->lastLogin(); ?>
                     </div>
                 </td>
             </tr>
