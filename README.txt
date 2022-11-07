@@ -52,6 +52,10 @@ No. WordPress does not have that information. It's introduced with the plugin so
 = 1.0.3 =
 * Stability and security improvements
 
+= 1.0.4 =
+* Same user displays ON/OFF in login status in User List
+* Same user cannot disable his own login status in User List
+
 == Upgrade Notice ==
 
 = 1.0.0 =
@@ -66,3 +70,5 @@ Support for switching from plugins like When Last Login and Ultimate Member
 = 1.0.3 =
 Improve security and performance
 
+= 1.0.4 =
+Improve user login status and toggle in user list

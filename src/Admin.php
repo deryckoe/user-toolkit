@@ -41,6 +41,11 @@ class Admin {
 			case 'can_login':
 				$active = USRTK_UserTools()->user( $user_id )->canLogin();
 
+                if ( $user_id === get_current_user_id() ) {
+                    $active_label = ($active === 1) ? __('On', 'user-toolkit') : __('Off', 'user-toolkit');
+                    return '<div class="ut-readonly-toggle" data-active="' . $active . '">' . $active_label .'</div>';
+                }
+
 				return '<div class="ut-toggle" data-active="' . $active . '" data-user-id="' . $user_id . '">
 						    <div class="switch"></div>
 					    </div>';
@@ -119,11 +124,7 @@ class Admin {
 
 		$can_login = isset( $_GET['can_login'] ) ? sanitize_text_field( $_GET['can_login'] ) : '';
 
-		if ( empty( $can_login ) ) {
-			return;
-		}
-
-		if ( in_array( $_GET['can_login'], [ '0', '1' ] ) ) {
+		if ( ! in_array( $can_login, [ '0', '1' ] ) ) {
 			return;
 		}
 

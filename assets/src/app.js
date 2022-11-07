@@ -1,5 +1,4 @@
 import './app.scss';
-import {resize} from "../../../../../wp-includes/js/codemirror/csslint";
 
 document.addEventListener("DOMContentLoaded", function (event) {
 

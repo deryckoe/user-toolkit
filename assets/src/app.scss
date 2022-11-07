@@ -44,3 +44,30 @@
   }
 
 }
+
+.ut-readonly-toggle {
+  border: 1px solid #dedede;
+  padding: 2px;
+  width: 32px;
+  height: 16px;
+  border-radius: 200px;
+  background-color: #f0f0f0;
+  transition: all 600ms ease-in-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.9em;
+  font-weight: 700;
+  text-transform: uppercase;
+  cursor: not-allowed;
+
+  &[data-active="0"] {
+    color: #a02a21;
+  }
+
+  &[data-active="1"] {
+    border-color: #6498d7;
+    background-color: #6498d7;
+    color: #fff;
+  }
+}

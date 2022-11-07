@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: User Toolkit\n"
-"POT-Creation-Date: 2022-11-02 13:06-0300\n"
-"PO-Revision-Date: 2022-11-02 13:09-0300\n"
+"POT-Creation-Date: 2022-11-07 20:03-0300\n"
+"PO-Revision-Date: 2022-11-07 20:04-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es_ES\n"
@@ -26,11 +26,11 @@ msgstr ""
 msgid "Active"
 msgstr "Activo"
 
-#: src/Admin.php:29 src/Admin.php:163
+#: src/Admin.php:29 src/Admin.php:168
 msgid "Last login"
 msgstr "Último acceso"
 
-#: src/Admin.php:30 src/Admin.php:155
+#: src/Admin.php:30 src/Admin.php:160
 msgid "Registered"
 msgstr "Registrado"
 
@@ -38,39 +38,47 @@ msgstr "Registrado"
 msgid "ID"
 msgstr "ID"
 
-#: src/Admin.php:88
+#: src/Admin.php:45
+msgid "On"
+msgstr "Si"
+
+#: src/Admin.php:45
+msgid "Off"
+msgstr "No"
+
+#: src/Admin.php:94
 msgid "All"
 msgstr "Todos"
 
-#: src/Admin.php:88
+#: src/Admin.php:94
 msgid "Login status"
 msgstr "Estado de acceso"
 
-#: src/Admin.php:94
+#: src/Admin.php:101
 msgid "All login status"
 msgstr "Todos los estados de acceso"
 
-#: src/Admin.php:97
+#: src/Admin.php:104
 msgid "Enabled (Active)"
 msgstr "Activado"
 
-#: src/Admin.php:98
+#: src/Admin.php:105
 msgid "Disabled"
 msgstr "Desactivado"
 
-#: src/Admin.php:100
+#: src/Admin.php:107
 msgid "Filter"
 msgstr "Filtrar"
 
-#: src/Admin.php:139
+#: src/Admin.php:144
 msgid "User Tools"
 msgstr "User Tools"
 
-#: src/Admin.php:143
+#: src/Admin.php:148
 msgid "Login active"
 msgstr "Inicio de sesión"
 
-#: src/Admin.php:149
+#: src/Admin.php:154
 msgid "Activate user login"
 msgstr "Activar el inicio de sesión del usuario"
 
@@ -82,16 +90,16 @@ msgstr ""
 "<strong>Error</strong>: El  usuario está desactivado. Por favor, póngase en "
 "contacto con su administrador para obtener más información."
 
-#: src/User.php:18
+#: src/User.php:28
 msgid "Never"
 msgstr "Nunca"
 
-#: src/User.php:21 src/User.php:35
+#: src/User.php:31 src/User.php:45
 #, php-format
 msgid "%s at %s"
 msgstr "%s a las %s"
 
-#: src/User.php:23 src/User.php:37
+#: src/User.php:33 src/User.php:47
 #, php-format
 msgid "%s ago"
 msgstr "hace %s"
