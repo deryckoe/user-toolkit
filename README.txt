@@ -1,11 +1,11 @@
 === User Tools ===
 Contributors: deryck
 Donate link: http://deryckoe.com/user-toolkit
-Tags: user, user-tools, user-toolkit, last-login, registered-date, user-id, disable-users
+Tags: user, user tools, user toolkit, last login, user registered, user id, disable user, user management, user profile
 Requires at least: 5.9.5
 Tested up to: 6.1
 Requires PHP: 7.3
-Stable tag: 1.0.2
+Stable tag: 1.0.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
