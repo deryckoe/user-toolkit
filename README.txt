@@ -1,7 +1,7 @@
 === User Tools ===
 Contributors: deryck
 Donate link: http://deryckoe.com/user-toolkit
-Tags: user, user tools, user toolkit, last login, user registered, user id, disable user, user management, user profile
+Tags: user profile, last login, disable user, registration date
 Requires at least: 5.9.5
 Tested up to: 6.1
 Requires PHP: 7.3
