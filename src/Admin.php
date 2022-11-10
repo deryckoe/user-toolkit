@@ -14,6 +14,7 @@ class Admin {
 		add_filter( 'manage_users_columns', [ $this, 'columnHeaders' ] );
 		add_filter( 'manage_users_custom_column', [ $this, 'columnContent' ], 10, 3 );
 		add_filter( 'manage_users_sortable_columns', [ $this, 'columnSortable' ] );
+		add_filter( 'user_row_actions', [ $this, 'userRowAction' ], 10, 2 );
 		add_action( 'pre_get_posts', [ $this, 'sortColumns' ] );
 		add_action( 'manage_users_extra_tablenav', [ $this, 'columnFilters' ] );
 		add_action( 'pre_get_users', [ $this, 'filterColumns' ] );
@@ -21,6 +22,33 @@ class Admin {
 		add_action( 'show_user_profile', [ $this, 'userProfileFields' ] );
 		add_action( 'personal_options_update', [ $this, 'saveUserFields' ] );
 		add_action( 'edit_user_profile_update', [ $this, 'saveUserFields' ] );
+		add_action( 'login_init', [ $this, 'switchUser' ] );
+
+	}
+
+	public function switchUser() {
+
+		if ( ! isset( $_GET['_wpnonce'] ) ) {
+			return;
+		}
+
+		if ( ! wp_verify_nonce( $_GET['_wpnonce'], 'switch_user' ) ) {
+			return;
+		}
+
+		$user = get_user_by( 'id', $_GET['user_id'] );
+
+        if ( false === $user ) {
+            return;
+        }
+
+		wp_clear_auth_cookie();
+		wp_set_current_user ( $user->ID );
+		wp_set_auth_cookie  ( $user->ID );
+
+		$redirect_to = user_admin_url();
+		wp_safe_redirect( $redirect_to );
+		exit;
 	}
 
 	public function columnHeaders( $columns ): array {
@@ -41,10 +69,11 @@ class Admin {
 			case 'can_login':
 				$active = USRTK_UserTools()->user( $user_id )->canLogin();
 
-                if ( $user_id === get_current_user_id() ) {
-                    $active_label = ($active === 1) ? __('On', 'user-toolkit') : __('Off', 'user-toolkit');
-                    return '<div class="ut-readonly-toggle" data-active="' . $active . '">' . $active_label .'</div>';
-                }
+				if ( $user_id === get_current_user_id() ) {
+					$active_label = ( $active === 1 ) ? __( 'On', 'user-toolkit' ) : __( 'Off', 'user-toolkit' );
+
+					return '<div class="ut-readonly-toggle" data-active="' . $active . '">' . $active_label . '</div>';
+				}
 
 				return '<div class="ut-toggle" data-active="' . $active . '" data-user-id="' . $user_id . '">
 						    <div class="switch"></div>
@@ -63,6 +92,21 @@ class Admin {
 
 	public function columnSortable( $columns ): array {
 		return array_merge( $columns, [ 'last_login' => 'last_login', 'registered' => 'registered', 'id' => 'id' ] );
+	}
+
+	public function userRowAction( $actions, $user ) {
+
+		$login_url = add_query_arg( [
+			'action'    => 'switch_user',
+			'user_id'   => $user->ID,
+			'user_from' => get_current_user_id(),
+		], wp_login_url() );
+
+		$safe_login_url = wp_nonce_url( $login_url, 'switch_user' );
+
+		$switch = '<a href="' . $safe_login_url . '">' . __( 'Switch to', 'user-toolkit' ) . '</a>';
+
+		return array_merge( $actions, [ $switch ] );
 	}
 
 	public function sortColumns( $query ): void {
