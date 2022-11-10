@@ -1,4 +1,4 @@
-=== User Tools ===
+=== User Toolkit ===
 Contributors: deryck
 Donate link: http://deryckoe.com/user-toolkit
 Tags: user profile, last login, disable user, registration date
