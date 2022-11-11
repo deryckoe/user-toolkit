@@ -16,7 +16,7 @@ class UserTools {
 	}
 
 	public function hooks() {
-		add_action( 'admin_enqueue_scripts', [ $this, 'assets' ] );
+		add_action( 'admin_enqueue_scripts', [ $this, 'adminAssets' ] );
 		add_action( 'wp_enqueue_scripts', [ $this, 'assets' ] );
 	}
 
@@ -39,8 +39,12 @@ class UserTools {
 		}
 	}
 
-	function assets() {
+	function adminAssets() {
 		wp_enqueue_script( 'user-toolkit', USRTK_URL . 'assets/dist/app.js', [ 'wp-api' ], USRTK_VERSION, true );
+		wp_enqueue_style( 'user-toolkit', USRTK_URL . 'assets/dist/app.css', [], USRTK_VERSION );
+	}
+
+	function assets() {
 		wp_enqueue_style( 'user-toolkit', USRTK_URL . 'assets/dist/app.css', [], USRTK_VERSION );
 	}
 
