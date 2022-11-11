@@ -23,10 +23,17 @@ class Admin {
 		add_action( 'personal_options_update', [ $this, 'saveUserFields' ] );
 		add_action( 'edit_user_profile_update', [ $this, 'saveUserFields' ] );
 		add_action( 'login_init', [ $this, 'switchUser' ] );
+		add_filter( 'admin_footer_text', [ $this, 'backLink' ] );
 
 	}
 
 	public function switchUser() {
+
+		$action = isset( $_GET['action'] ) ? sanitize_text_field( $_GET['action'] ) : false;
+
+		if ( ! $action && in_array( $action, [ 'switch_user', 'restore_user' ] ) ) {
+			return;
+		}
 
 		if ( ! isset( $_GET['_wpnonce'] ) ) {
 			return;
@@ -36,15 +43,46 @@ class Admin {
 			return;
 		}
 
+		$user_id = intval( $_GET['user_id'] );
+
+		if ( ! $user_id ) {
+			return;
+		}
+
 		$user = get_user_by( 'id', $_GET['user_id'] );
 
-        if ( false === $user ) {
-            return;
-        }
+		if ( false === $user ) {
+			return;
+		}
+
+		// TODO: https://developer.wordpress.org/reference/functions/wp_admin_bar_my_account_item/
+
+		$user_from_id = intval( $_GET['user_from'] );
+
+		if ( ! $user_from_id ) {
+			return;
+		}
+
+
+		if ( $_GET['action'] === 'restore_user' ) {
+			if ( (int) $_COOKIE['user_switched'] !== $user_from_id ) {
+				wp_die( __( 'You are not allowed to perform this action.', 'user-toolkit' ) );
+			}
+		}
 
 		wp_clear_auth_cookie();
-		wp_set_current_user ( $user->ID );
-		wp_set_auth_cookie  ( $user->ID );
+		wp_set_current_user( $user->ID );
+		wp_set_auth_cookie( $user->ID );
+
+		$user_from = get_user_by( 'id', $user_from_id );
+
+		if ( false !== $user_from && $_GET['action'] === 'switch_user' ) {
+			setcookie( 'user_from', $user_from->ID, time() + DAY_IN_SECONDS, '/', COOKIE_DOMAIN, is_ssl(), true );
+			setcookie( 'user_switched', $user->ID, time() + DAY_IN_SECONDS, '/', COOKIE_DOMAIN, is_ssl(), true );
+		} else {
+			setcookie( 'user_from', $user_from->ID, time() - 3600, '/', COOKIE_DOMAIN, is_ssl(), true );
+			setcookie( 'user_switched', $user->ID, time() - 3600, '/', COOKIE_DOMAIN, is_ssl(), true );
+		}
 
 		$redirect_to = user_admin_url();
 		wp_safe_redirect( $redirect_to );
@@ -95,6 +133,14 @@ class Admin {
 	}
 
 	public function userRowAction( $actions, $user ) {
+
+		if ( ! current_user_can( 'remove_users' ) && ! current_user_can( 'manage_network_users' ) ) {
+			return $actions;
+		}
+
+		if ( $user->ID === get_current_user_id() ) {
+			return $actions;
+		}
 
 		$login_url = add_query_arg( [
 			'action'    => 'switch_user',
@@ -234,6 +280,35 @@ class Admin {
 		update_user_meta( $user_id, 'can_login', $can_login );
 
 		return true;
+	}
+
+	public function backLink( $text ) {
+
+		if ( ! isset( $_COOKIE['user_from'] ) ) {
+			return $text;
+		}
+
+		$user_from_id = $_COOKIE['user_from'];
+		$user_from    = get_user_by( 'id', $user_from_id );
+
+		if ( false === $user_from ) {
+			return $text;
+		}
+
+        if ( $user_from->ID === get_current_user_id() ) {
+            return $text;
+        }
+
+		$login_url = add_query_arg( [
+			'action'    => 'restore_user',
+			'user_id'   => $user_from_id,
+			'user_from' => get_current_user_id(),
+		], wp_login_url() );
+
+		$safe_login_url = wp_nonce_url( $login_url, 'switch_user' );
+
+		return '<a href="' . $safe_login_url . '">' . sprintf( __( 'Return to %s', 'user-toolkit' ), $user_from->display_name ) . '</a>';
+
 	}
 
 }
