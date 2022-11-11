@@ -17,6 +17,7 @@ class UserTools {
 
 	public function hooks() {
 		add_action( 'admin_enqueue_scripts', [ $this, 'assets' ] );
+		add_action( 'wp_enqueue_scripts', [ $this, 'assets' ] );
 	}
 
 	public function user( $user_id ): User {
@@ -30,6 +31,7 @@ class UserTools {
 			Admin::class,
 			RestEndpoints::class,
 			Authentication::class,
+			UserSwitch::class,
 		];
 
 		foreach ( $dependencies as $dependency ) {

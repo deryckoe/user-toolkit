@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: User Toolkit\n"
-"POT-Creation-Date: 2022-11-07 20:03-0300\n"
-"PO-Revision-Date: 2022-11-07 20:04-0300\n"
+"POT-Creation-Date: 2022-11-11 16:43-0300\n"
+"PO-Revision-Date: 2022-11-11 16:44-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es_ES\n"
@@ -21,64 +21,65 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.min.js\n"
 "X-Poedit-SearchPathExcluded-1: vendor\n"
+"X-Poedit-SearchPathExcluded-2: node_modules\n"
 
-#: src/Admin.php:28
+#: src/Admin.php:30
 msgid "Active"
 msgstr "Activo"
 
-#: src/Admin.php:29 src/Admin.php:168
+#: src/Admin.php:31 src/Admin.php:172
 msgid "Last login"
 msgstr "Último acceso"
 
-#: src/Admin.php:30 src/Admin.php:160
+#: src/Admin.php:32 src/Admin.php:164
 msgid "Registered"
 msgstr "Registrado"
 
-#: src/Admin.php:31
+#: src/Admin.php:33
 msgid "ID"
 msgstr "ID"
 
-#: src/Admin.php:45
+#: src/Admin.php:47
 msgid "On"
 msgstr "Si"
 
-#: src/Admin.php:45
+#: src/Admin.php:47
 msgid "Off"
 msgstr "No"
 
-#: src/Admin.php:94
+#: src/Admin.php:98
 msgid "All"
 msgstr "Todos"
 
-#: src/Admin.php:94
+#: src/Admin.php:98
 msgid "Login status"
 msgstr "Estado de acceso"
 
-#: src/Admin.php:101
+#: src/Admin.php:105
 msgid "All login status"
 msgstr "Todos los estados de acceso"
 
-#: src/Admin.php:104
+#: src/Admin.php:108
 msgid "Enabled (Active)"
 msgstr "Activado"
 
-#: src/Admin.php:105
+#: src/Admin.php:109
 msgid "Disabled"
 msgstr "Desactivado"
 
-#: src/Admin.php:107
+#: src/Admin.php:111
 msgid "Filter"
 msgstr "Filtrar"
 
-#: src/Admin.php:144
+#: src/Admin.php:148
 msgid "User Tools"
 msgstr "User Tools"
 
-#: src/Admin.php:148
+#: src/Admin.php:152
 msgid "Login active"
 msgstr "Inicio de sesión"
 
-#: src/Admin.php:154
+#: src/Admin.php:158
 msgid "Activate user login"
 msgstr "Activar el inicio de sesión del usuario"
 
@@ -103,6 +104,24 @@ msgstr "%s a las %s"
 #, php-format
 msgid "%s ago"
 msgstr "hace %s"
+
+#: src/UserSwitch.php:35
+msgid "Switch to"
+msgstr "Cambiar a"
+
+#: src/UserSwitch.php:79
+msgid "You are not allowed to perform this action."
+msgstr "No tienes permisos para realizar esta acción."
+
+#: src/UserSwitch.php:129
+#, php-format
+msgid "You are logged in as %s."
+msgstr "Estás conectado como %s."
+
+#: src/UserSwitch.php:130
+#, php-format
+msgid "Switch back to %s"
+msgstr "Cambiar de vuelta a %s"
 
 #. Plugin Name of the plugin/theme
 msgid "User Toolkit"
