@@ -55,4 +55,18 @@ class User {
 		return ( $can_login === '' || $can_login === '1' ) ? 1 : 0;
 	}
 
+	public function displayName() {
+
+		$user = get_user_by('id', $this->user_id );
+
+		$display_name = $user->display_name;
+
+		if ( ! empty( $user->first_name ) ) {
+			$display_name = $user->first_name . ' ' . $user->last_name;
+		}
+
+		return trim( $display_name );
+
+	}
+
 }

@@ -143,6 +143,7 @@ class Admin {
 		?>
         <h2><?php _e( 'User Tools', 'user-toolkit' ) ?></h2>
         <table class="form-table">
+	        <?php do_action('usrtk_before_profile_settings', $user ); ?>
 			<?php if ( current_user_can( 'edit_user' ) && $user->ID !== get_current_user_id() ) : ?>
                 <tr>
                     <th scope="row"><?php _e( 'Login active', 'user-toolkit' ) ?></th>
@@ -177,6 +178,7 @@ class Admin {
                     </div>
                 </td>
             </tr>
+            <?php do_action('usrtk_after_profile_settings', $user ); ?>
         </table>
 		<?php
 	}

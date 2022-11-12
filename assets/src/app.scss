@@ -71,3 +71,25 @@
     color: #fff;
   }
 }
+
+
+#switch_back_user {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  background: #e2e2e2;
+  padding: 5px 10px;
+  font-size: 14px;
+  border: 1px solid #bfbebe;
+  border-radius: 6px;
+  margin: 5px;
+
+  p {
+    margin: 0;
+    padding: 0;
+  }
+
+  a {
+    font-weight: 700;
+  }
+}
