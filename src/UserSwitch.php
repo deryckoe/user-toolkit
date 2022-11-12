@@ -17,11 +17,13 @@ class UserSwitch {
 		add_action( 'usrtk_after_profile_settings', [ $this, 'userProfileFields' ] );
 	}
 
-    private function getUserIDFromAuthCookie($name) {
-        $user_login = wp_parse_auth_cookie($_COOKIE[$name], 'auth');
-        $user = get_user_by('user_login', $user_login);
-        return $user->ID;
-    }
+	private function getUserIDFromAuthCookie( $name ) {
+		$cookie = wp_parse_auth_cookie( $_COOKIE[ $name ], 'auth' );
+        $user_login = $cookie['username'];
+		$user       = get_user_by( 'login', $user_login );
+
+		return $user->ID;
+	}
 
 	public function userRowAction( $actions, $user ) {
 
@@ -82,7 +84,7 @@ class UserSwitch {
 
 
 		if ( $_GET['action'] === 'restore_user' ) {
-			if ( ! isset( $_COOKIE[ USRTK_COOKIE_USER_FROM ] ) || (int) $_COOKIE[ USRTK_COOKIE_USER_FROM ] !== $user_from_id ) {
+			if ( ! isset( $_COOKIE[ USRTK_COOKIE_USER_FROM ] ) || (int) $this->getUserIDFromAuthCookie( USRTK_COOKIE_USER_FROM ) !== $user_from_id ) {
 				wp_die( __( 'You are not allowed to perform this action.', 'user-toolkit' ) );
 			}
 		}
@@ -94,16 +96,14 @@ class UserSwitch {
 		$user_from = get_user_by( 'id', $user_from_id );
 
 		if ( false !== $user_from && $_GET['action'] === 'switch_user' ) {
+			$user_switch = wp_generate_auth_cookie( $user_from->ID, time() + DAY_IN_SECONDS, 'auth', '' );
+			$user_from   = wp_generate_auth_cookie( $user->ID, time() + DAY_IN_SECONDS, 'auth', '' );
 
-			$auth_cookie      = wp_generate_auth_cookie( $user_id, time() + DAY_IN_SECONDS, 'auth', '' );
-
-			setcookie( 'urtk_test',$auth_cookie, time() + DAY_IN_SECONDS, '/', COOKIE_DOMAIN, is_ssl(), true );
-
-			setcookie( USRTK_COOKIE_USER_SWITCH, $user_from->ID, time() + DAY_IN_SECONDS, '/', COOKIE_DOMAIN, is_ssl(), true );
-			setcookie( USRTK_COOKIE_USER_FROM, $user->ID, time() + DAY_IN_SECONDS, '/', COOKIE_DOMAIN, is_ssl(), true );
+			setcookie( USRTK_COOKIE_USER_SWITCH, $user_switch, time() + DAY_IN_SECONDS, '/', COOKIE_DOMAIN, is_ssl(), true );
+			setcookie( USRTK_COOKIE_USER_FROM, $user_from, time() + DAY_IN_SECONDS, '/', COOKIE_DOMAIN, is_ssl(), true );
 		} else {
-			setcookie( USRTK_COOKIE_USER_SWITCH, $user_from->ID, time() - 3600, '/', COOKIE_DOMAIN, is_ssl(), true );
-			setcookie( USRTK_COOKIE_USER_FROM, $user->ID, time() - 3600, '/', COOKIE_DOMAIN, is_ssl(), true );
+			setcookie( USRTK_COOKIE_USER_SWITCH, time(), time() - 3600, '/', COOKIE_DOMAIN, is_ssl(), true );
+			setcookie( USRTK_COOKIE_USER_FROM, time(), time() - 3600, '/', COOKIE_DOMAIN, is_ssl(), true );
 		}
 
 		$redirect_to = user_admin_url();
@@ -117,7 +117,7 @@ class UserSwitch {
 			return;
 		}
 
-		$user_from_id = $_COOKIE[ USRTK_COOKIE_USER_SWITCH ];
+		$user_from_id = $this->getUserIDFromAuthCookie( USRTK_COOKIE_USER_SWITCH );
 		$user_from    = get_user_by( 'id', $user_from_id );
 
 		if ( false === $user_from ) {
@@ -187,7 +187,7 @@ class UserSwitch {
 			return;
 		}
 
-		$user_from_id = $_COOKIE[ USRTK_COOKIE_USER_SWITCH ];
+		$user_from_id = $this->getUserIDFromAuthCookie( USRTK_COOKIE_USER_SWITCH );
 		$user_from    = get_user_by( 'id', $user_from_id );
 
 		if ( false === $user_from ) {
