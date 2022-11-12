@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: User Toolkit\n"
-"POT-Creation-Date: 2022-11-07 20:03-0300\n"
+"POT-Creation-Date: 2022-11-12 15:22-0300\n"
 "PO-Revision-Date: 2022-11-02 13:06-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -27,11 +27,11 @@ msgstr ""
 msgid "Active"
 msgstr ""
 
-#: src/Admin.php:29 src/Admin.php:168
+#: src/Admin.php:29 src/Admin.php:174
 msgid "Last login"
 msgstr ""
 
-#: src/Admin.php:30 src/Admin.php:160
+#: src/Admin.php:30 src/Admin.php:166
 msgid "Registered"
 msgstr ""
 
@@ -75,12 +75,16 @@ msgstr ""
 msgid "User Tools"
 msgstr ""
 
-#: src/Admin.php:148
+#: src/Admin.php:149
 msgid "Login active"
 msgstr ""
 
-#: src/Admin.php:154
+#: src/Admin.php:157
 msgid "Activate user login"
+msgstr ""
+
+#: src/Admin.php:159
+msgid "First created user cannot be disabled."
 msgstr ""
 
 #: src/Authentication.php:26
@@ -101,6 +105,24 @@ msgstr ""
 #: src/User.php:33 src/User.php:47
 #, php-format
 msgid "%s ago"
+msgstr ""
+
+#: src/UserSwitch.php:38 src/UserSwitch.php:161
+msgid "Switch to"
+msgstr ""
+
+#: src/UserSwitch.php:82
+msgid "You are not allowed to perform this action."
+msgstr ""
+
+#: src/UserSwitch.php:132
+#, php-format
+msgid "You are logged in as %s."
+msgstr ""
+
+#: src/UserSwitch.php:133 src/UserSwitch.php:204
+#, php-format
+msgid "Switch back to %s"
 msgstr ""
 
 #. Plugin Name of the plugin/theme
