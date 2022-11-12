@@ -54,7 +54,7 @@ Full support for administration over SSL (if applicable).
 
 ## PRIVACY STATEMENT
 
-This plugin makes use of browser cookies in order to allow users to switch to another account. Its cookies operate using the same mechanism as the authentication cookies in WordPress core, which means their values contain the user’s user ID field in plain text which is not intended as personal information. The names of the cookies are:
+This plugin makes use of browser cookies in order to allow users to switch to another account. Its cookies operate using the same mechanism as the authentication cookies in WordPress core, which means their values contain the user’s user_login field in plain text which should be treated as potentially personally identifiable information (PII) for privacy and regulatory reasons (GDPR, CCPA, etc). . The names of the cookies are:
 
 * wp_usrtk_user_from_{COOKIEHASH}
 * wp_usrtk_user_switched_{COOKIEHASH}
