@@ -30,7 +30,12 @@ class RestEndpoints {
 						'sanitize_callback' => function ( $value ) {
 							return (int) sanitize_text_field( $value );
 						},
-						'validate_callback' => function ( $value ) {
+						'validate_callback' => function ( $value, \WP_REST_Request $request ) {
+
+							if ( (int) $request->get_param('id') === 1 ) {
+								return false;
+							}
+
 							return in_array( $value, [ 0, 1 ] );
 						},
 					],

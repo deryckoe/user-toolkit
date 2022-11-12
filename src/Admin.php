@@ -41,7 +41,7 @@ class Admin {
 			case 'can_login':
 				$active = USRTK_UserTools()->user( $user_id )->canLogin();
 
-                if ( $user_id === get_current_user_id() ) {
+                if ( $user_id === get_current_user_id() || $user_id === 1 ) {
                     $active_label = ($active === 1) ? __('On', 'user-toolkit') : __('Off', 'user-toolkit');
                     return '<div class="ut-readonly-toggle" data-active="' . $active . '">' . $active_label .'</div>';
                 }
@@ -149,9 +149,14 @@ class Admin {
                     <td>
                         <div class="time_wrapper">
                             <label for="can_login">
+                                <?php $disabled = ( $user->ID === 1 ) ? ' disabled ' : '' ?>
                                 <input name="can_login" type="checkbox" id="can_login"
+                                       <?php echo $disabled ?>
                                        value="1" <?php checked( USRTK_UserTools()->user( $user->ID )->canLogin(), 1 ) ?>>
 								<?php _e( 'Activate user login', 'user-toolkit' ) ?></label>
+                            <?php if ( $disabled ) : ?>
+                                <p class="description"><?php _e('First created user cannot be disabled.', 'user-toolkit') ?></p>
+                            <?php endif; ?>
                         </div>
                     </td>
                 </tr>
