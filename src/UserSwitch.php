@@ -13,9 +13,15 @@ class UserSwitch {
 		add_action( 'login_init', [ $this, 'switchUser' ] );
 		add_action( 'admin_notices', [ $this, 'restoreUserNotice' ] );
 		add_action( 'wp_footer', [ $this, 'restoreUserNotice' ] );
-		add_action( 'admin_bar_menu', [ $this, 'restoreUserMenu'], 10 );
+		add_action( 'admin_bar_menu', [ $this, 'restoreUserMenu' ], 10 );
 		add_action( 'usrtk_after_profile_settings', [ $this, 'userProfileFields' ] );
 	}
+
+    private function getUserIDFromAuthCookie($name) {
+        $user_login = wp_parse_auth_cookie($_COOKIE[$name], 'auth');
+        $user = get_user_by('user_login', $user_login);
+        return $user->ID;
+    }
 
 	public function userRowAction( $actions, $user ) {
 
@@ -68,8 +74,6 @@ class UserSwitch {
 			return;
 		}
 
-		// TODO: https://developer.wordpress.org/reference/functions/wp_admin_bar_my_account_item/
-
 		$user_from_id = intval( $_GET['user_from'] );
 
 		if ( ! $user_from_id ) {
@@ -78,7 +82,7 @@ class UserSwitch {
 
 
 		if ( $_GET['action'] === 'restore_user' ) {
-			if ( ! isset( $_COOKIE['user_switched'] ) || (int) $_COOKIE['user_switched'] !== $user_from_id ) {
+			if ( ! isset( $_COOKIE[ USRTK_COOKIE_USER_FROM ] ) || (int) $_COOKIE[ USRTK_COOKIE_USER_FROM ] !== $user_from_id ) {
 				wp_die( __( 'You are not allowed to perform this action.', 'user-toolkit' ) );
 			}
 		}
@@ -90,11 +94,16 @@ class UserSwitch {
 		$user_from = get_user_by( 'id', $user_from_id );
 
 		if ( false !== $user_from && $_GET['action'] === 'switch_user' ) {
-			setcookie( 'user_from', $user_from->ID, time() + DAY_IN_SECONDS, '/', COOKIE_DOMAIN, is_ssl(), true );
-			setcookie( 'user_switched', $user->ID, time() + DAY_IN_SECONDS, '/', COOKIE_DOMAIN, is_ssl(), true );
+
+			$auth_cookie      = wp_generate_auth_cookie( $user_id, time() + DAY_IN_SECONDS, 'auth', '' );
+
+			setcookie( 'urtk_test',$auth_cookie, time() + DAY_IN_SECONDS, '/', COOKIE_DOMAIN, is_ssl(), true );
+
+			setcookie( USRTK_COOKIE_USER_SWITCH, $user_from->ID, time() + DAY_IN_SECONDS, '/', COOKIE_DOMAIN, is_ssl(), true );
+			setcookie( USRTK_COOKIE_USER_FROM, $user->ID, time() + DAY_IN_SECONDS, '/', COOKIE_DOMAIN, is_ssl(), true );
 		} else {
-			setcookie( 'user_from', $user_from->ID, time() - 3600, '/', COOKIE_DOMAIN, is_ssl(), true );
-			setcookie( 'user_switched', $user->ID, time() - 3600, '/', COOKIE_DOMAIN, is_ssl(), true );
+			setcookie( USRTK_COOKIE_USER_SWITCH, $user_from->ID, time() - 3600, '/', COOKIE_DOMAIN, is_ssl(), true );
+			setcookie( USRTK_COOKIE_USER_FROM, $user->ID, time() - 3600, '/', COOKIE_DOMAIN, is_ssl(), true );
 		}
 
 		$redirect_to = user_admin_url();
@@ -102,13 +111,13 @@ class UserSwitch {
 		exit;
 	}
 
-	public function restoreUserNotice( $text ) {
+	public function restoreUserNotice() {
 
-		if ( ! isset( $_COOKIE['user_from'] ) ) {
+		if ( ! isset( $_COOKIE[ USRTK_COOKIE_USER_SWITCH ] ) ) {
 			return;
 		}
 
-		$user_from_id = $_COOKIE['user_from'];
+		$user_from_id = $_COOKIE[ USRTK_COOKIE_USER_SWITCH ];
 		$user_from    = get_user_by( 'id', $user_from_id );
 
 		if ( false === $user_from ) {
@@ -168,17 +177,17 @@ class UserSwitch {
 	}
 
 	public function restoreUserMenu( $wp_admin_bar ) {
-		$user_id      = get_current_user_id();
+		$user_id = get_current_user_id();
 
 		if ( ! $user_id ) {
 			return;
 		}
 
-		if ( ! isset( $_COOKIE['user_from'] ) ) {
+		if ( ! isset( $_COOKIE[ USRTK_COOKIE_USER_SWITCH ] ) ) {
 			return;
 		}
 
-		$user_from_id = $_COOKIE['user_from'];
+		$user_from_id = $_COOKIE[ USRTK_COOKIE_USER_SWITCH ];
 		$user_from    = get_user_by( 'id', $user_from_id );
 
 		if ( false === $user_from ) {
