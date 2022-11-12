@@ -8,7 +8,7 @@
  * Plugin Name:       User Toolkit
  * Plugin URI:        https://deryckoe.com/user-toolkit
  * Description:       The missing user tools and activity data that you need and don't have by default.
- * Version:           1.0.4
+ * Version:           1.1
  * Author:            Deryck Oñate
  * Author URI:        http://deryckoe.com
  * License:           GPL-2.0+
@@ -25,7 +25,7 @@ if ( ! defined( 'WPINC' ) ) {
 /**
  * Currently plugin version.
  */
-define( 'USRTK_VERSION', '1.0.4' );
+define( 'USRTK_VERSION', '1.1' );
 
 /**
  * Plugin paths
@@ -35,6 +35,8 @@ define( 'USRTK_URL', plugins_url( '/', __FILE__ ) );
 define( 'USRTK_LANGUAGES_DIR', basename( dirname( __FILE__ ) ) );
 define( 'USRTK_DATE_FORMAT', 'd/m/Y' );
 define( 'USRTK_TIME_FORMAT', 'g:i a' );
+define( 'USRTK_COOKIE_USER_SWITCH', 'wp_usrtk_user_switched_' . COOKIEHASH );
+define( 'USRTK_COOKIE_USER_FROM', 'wp_usrtk_user_from_' . COOKIEHASH );
 
 load_plugin_textdomain( 'user-toolkit', false, USRTK_LANGUAGES_DIR . '/languages' );
 
