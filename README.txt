@@ -5,7 +5,7 @@ Tags: user profile, last login, disable user, registration date
 Requires at least: 5.9.5
 Tested up to: 6.1
 Requires PHP: 7.3
-Stable tag: 1.1
+Stable tag: 1.1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -104,6 +104,10 @@ No. WordPress does not have that information. It's introduced with the plugin so
 * Switch to any user account from the Users screen and be able to switch back to your own user later.
 * Fix: First created user cannot be disabled.
 
+= 1.1.2 =
+* Fixed an issue that allows disabling the first user created.
+* Fixed an issue that disabled the user when editing their own profile.
+
 == Upgrade Notice ==
 
 = 1.0.0 =
@@ -123,3 +127,7 @@ Improve user login status and toggle in user list
 
 = 1.1 =
 Switch to any user account from the Users screen and be able to switch back to your own user later.
+
+= 1.1.2 =
+* Fixed an issue that allows disabling the first user created.
+* Fixed an issue that disabled the user when editing their own profile.

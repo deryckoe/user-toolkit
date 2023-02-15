@@ -190,6 +190,10 @@ class Admin {
 
 		$can_login = isset( $_POST['can_login'] ) ? sanitize_text_field( $_POST['can_login'] ) : '0';
 
+        if ( $user_id === 1 || $user_id === get_current_user_id() ) {
+            $can_login = '1';
+        }
+
 		if ( ! in_array( $can_login, [ '0', '1' ] ) ) {
 			return false;
 		}
