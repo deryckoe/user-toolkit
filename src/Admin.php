@@ -14,7 +14,7 @@ class Admin {
 		add_filter( 'manage_users_columns', [ $this, 'columnHeaders' ] );
 		add_filter( 'manage_users_custom_column', [ $this, 'columnContent' ], 10, 3 );
 		add_filter( 'manage_users_sortable_columns', [ $this, 'columnSortable' ] );
-		add_action( 'pre_get_posts', [ $this, 'sortColumns' ] );
+		add_action( 'pre_get_users', [ $this, 'sortColumns' ] );
 		add_action( 'manage_users_extra_tablenav', [ $this, 'columnFilters' ] );
 		add_action( 'pre_get_users', [ $this, 'filterColumns' ] );
 		add_action( 'edit_user_profile', [ $this, 'userProfileFields' ] );

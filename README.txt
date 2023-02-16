@@ -84,50 +84,56 @@ No. WordPress does not have that information. It's introduced with the plugin so
 
 == Changelog ==
 
-= 1.0.0 =
-* Initial Release
+= 1.1.3 =
+* Fixed and issue that prevents user to be ordered by Last Login
 
-= 1.0.1 =
-* Downgraded to support PHP 7.3
-
-= 1.0.2 =
-* Ability to migrate last login data from When Last Login and Ultimate Member plugins
-
-= 1.0.3 =
-* Stability and security improvements
-
-= 1.0.4 =
-* Same user displays ON/OFF in login status in User List
-* Same user cannot disable his own login status in User List
+= 1.1.2 =
+* Fixed an issue that allows disabling the first user created.
+* Fixed an issue that disabled the user when editing their own profile.
 
 = 1.1 =
 * Switch to any user account from the Users screen and be able to switch back to your own user later.
 * Fix: First created user cannot be disabled.
 
-= 1.1.2 =
-* Fixed an issue that allows disabling the first user created.
-* Fixed an issue that disabled the user when editing their own profile.
+= 1.0.4 =
+* Same user displays ON/OFF in login status in User List
+* Same user cannot disable his own login status in User List
+
+= 1.0.3 =
+* Stability and security improvements
+
+= 1.0.2 =
+* Ability to migrate last login data from When Last Login and Ultimate Member plugins
+
+= 1.0.1 =
+* Downgraded to support PHP 7.3
+
+= 1.0.0 =
+* Initial Release
 
 == Upgrade Notice ==
 
-= 1.0.0 =
-Last Login, Registration Date and disable user login without deleting him.
+= 1.1.3 =
+* Fixed and issue that prevents user to be ordered by Last Login
 
-= 1.0.1 =
-Downgraded to support PHP 7.3
-
-= 1.0.2 =
-Support for switching from plugins like When Last Login and Ultimate Member
-
-= 1.0.3 =
-Improve security and performance
-
-= 1.0.4 =
-Improve user login status and toggle in user list
+= 1.1.2 =
+* Fixed an issue that allows disabling the first user created.
+* Fixed an issue that disabled the user when editing their own profile.
 
 = 1.1 =
 Switch to any user account from the Users screen and be able to switch back to your own user later.
 
-= 1.1.2 =
-* Fixed an issue that allows disabling the first user created.
-* Fixed an issue that disabled the user when editing their own profile.
+= 1.0.4 =
+Improve user login status and toggle in user list
+
+= 1.0.3 =
+Improve security and performance
+
+= 1.0.2 =
+Support for switching from plugins like When Last Login and Ultimate Member
+
+= 1.0.1 =
+Downgraded to support PHP 7.3
+
+= 1.0.0 =
+Last Login, Registration Date and disable user login without deleting him.

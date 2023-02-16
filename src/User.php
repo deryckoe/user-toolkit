@@ -15,11 +15,15 @@ class User {
 		$last_login_timestamp = get_user_meta( $this->user_id, 'last_login', true );
 
 		if ( empty( $last_login_timestamp ) ) {
-			$last_login_timestamp = get_user_meta( $this->user_id, 'when_last_login', true );
+			$when_last_login = get_user_meta( $this->user_id, 'when_last_login', true );
+			update_user_meta( $this->user_id, 'last_login', $when_last_login );
+			$last_login_timestamp = get_user_meta( $this->user_id, 'last_login', true );
 		}
 
 		if ( empty( $last_login_timestamp ) ) {
-			$last_login_timestamp = get_user_meta( $this->user_id, '_um_last_login', true );
+			$_um_last_login = get_user_meta( $this->user_id, '_um_last_login', true );
+			update_user_meta( $this->user_id, 'last_login', $_um_last_login );
+			$last_login_timestamp = get_user_meta( $this->user_id, 'last_login', true );
 		}
 
 		$date = wp_date( USRTK_DATE_FORMAT, $last_login_timestamp, wp_timezone() );
@@ -57,7 +61,7 @@ class User {
 
 	public function displayName() {
 
-		$user = get_user_by('id', $this->user_id );
+		$user = get_user_by( 'id', $this->user_id );
 
 		$display_name = $user->display_name;
 
