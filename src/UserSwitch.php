@@ -112,11 +112,6 @@ class UserSwitch {
 			setcookie( USRTK_COOKIE_USER_FROM, time(), time() - 3600, '/', COOKIE_DOMAIN, is_ssl(), true );
 		}
 
-//		$redirect_to = user_admin_url();
-//		if ( ! current_user_can( 'remove_users' ) && ! current_user_can( 'manage_network_users' ) ) {
-//
-//		}
-
 		$redirect_to = user_admin_url();
 		wp_safe_redirect( $redirect_to );
 		exit;
