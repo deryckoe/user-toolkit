@@ -10,7 +10,7 @@ class UserSwitch {
 
 	public function actions() {
 		add_filter( 'user_row_actions', [ $this, 'userRowAction' ], 10, 2 );
-		add_action( 'login_init', [ $this, 'switchUser' ] );
+		add_action( 'init', [ $this, 'switchUser' ] );
 		add_action( 'admin_notices', [ $this, 'restoreUserNotice' ] );
 		add_action( 'wp_footer', [ $this, 'restoreUserNotice' ] );
 		add_action( 'admin_bar_menu', [ $this, 'restoreUserMenu' ], 10 );
@@ -89,6 +89,12 @@ class UserSwitch {
 			}
 		}
 
+        if ( $_GET['action'] === 'switch_user' ) {
+	        if ( ! current_user_can( 'remove_users' ) && ! current_user_can( 'manage_network_users' ) ) {
+		        wp_die( __( 'You are not allowed to perform this action.', 'user-toolkit' ) );
+	        }
+        }
+
 		wp_clear_auth_cookie();
 		wp_set_current_user( $user->ID );
 		wp_set_auth_cookie( $user->ID );
@@ -105,6 +111,11 @@ class UserSwitch {
 			setcookie( USRTK_COOKIE_USER_SWITCH, time(), time() - 3600, '/', COOKIE_DOMAIN, is_ssl(), true );
 			setcookie( USRTK_COOKIE_USER_FROM, time(), time() - 3600, '/', COOKIE_DOMAIN, is_ssl(), true );
 		}
+
+//		$redirect_to = user_admin_url();
+//		if ( ! current_user_can( 'remove_users' ) && ! current_user_can( 'manage_network_users' ) ) {
+//
+//		}
 
 		$redirect_to = user_admin_url();
 		wp_safe_redirect( $redirect_to );

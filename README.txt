@@ -84,6 +84,9 @@ No. WordPress does not have that information. It's introduced with the plugin so
 
 == Changelog ==
 
+= 1.1.4 =
+* Fixed and issue that prevents user switching if there is no access to wp-login.php
+
 = 1.1.3 =
 * Fixed and issue that prevents user to be ordered by Last Login
 
@@ -112,6 +115,9 @@ No. WordPress does not have that information. It's introduced with the plugin so
 * Initial Release
 
 == Upgrade Notice ==
+
+= 1.1.4 =
+* Fixed and issue that prevents user switching if there is no access to wp-login.php
 
 = 1.1.3 =
 * Fixed and issue that prevents user to be ordered by Last Login
