@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: User Toolkit\n"
-"POT-Creation-Date: 2022-11-12 15:22-0300\n"
-"PO-Revision-Date: 2022-11-12 15:22-0300\n"
+"POT-Creation-Date: 2023-03-07 17:18-0300\n"
+"PO-Revision-Date: 2023-03-07 17:20-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es_ES\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.2\n"
+"X-Generator: Poedit 3.2.2\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
 "X-Poedit-WPHeader: user-toolkit.php\n"
@@ -27,11 +27,11 @@ msgstr ""
 msgid "Active"
 msgstr "Activo"
 
-#: src/Admin.php:29 src/Admin.php:174
+#: src/Admin.php:29 src/Admin.php:230
 msgid "Last login"
 msgstr "Último acceso"
 
-#: src/Admin.php:30 src/Admin.php:166
+#: src/Admin.php:30 src/Admin.php:222
 msgid "Registered"
 msgstr "Registrado"
 
@@ -47,43 +47,67 @@ msgstr "Si"
 msgid "Off"
 msgstr "No"
 
-#: src/Admin.php:94
-msgid "All"
-msgstr "Todos"
-
-#: src/Admin.php:94
+#: src/Admin.php:99
 msgid "Login status"
 msgstr "Estado de acceso"
 
-#: src/Admin.php:101
+#: src/Admin.php:99
+msgid "All"
+msgstr "Todos"
+
+#: src/Admin.php:106
 msgid "All login status"
 msgstr "Todos los estados de acceso"
 
-#: src/Admin.php:104
+#: src/Admin.php:109
 msgid "Enabled (Active)"
 msgstr "Activado"
 
-#: src/Admin.php:105
+#: src/Admin.php:110
 msgid "Disabled"
 msgstr "Desactivado"
 
-#: src/Admin.php:107
+#: src/Admin.php:113
+msgid "Login date range"
+msgstr "Rango de inicio de sesión"
+
+#: src/Admin.php:115
+msgid "All Logins"
+msgstr "Todos los accesos"
+
+#: src/Admin.php:116
+msgid "Not yet logged in"
+msgstr "Sin acceso registrado"
+
+#: src/Admin.php:117
+msgid "Today's logins"
+msgstr "Accesos de hoy"
+
+#: src/Admin.php:118
+msgid "Last 30 days logins"
+msgstr "Últimos 30 días"
+
+#: src/Admin.php:119
+msgid "Last 60 days logins"
+msgstr "Últimos 60 días"
+
+#: src/Admin.php:121
 msgid "Filter"
 msgstr "Filtrar"
 
-#: src/Admin.php:144
+#: src/Admin.php:200
 msgid "User Tools"
 msgstr "User Tools"
 
-#: src/Admin.php:149
+#: src/Admin.php:205
 msgid "Login active"
 msgstr "Inicio de sesión"
 
-#: src/Admin.php:157
+#: src/Admin.php:213
 msgid "Activate user login"
 msgstr "Activar el inicio de sesión del usuario"
 
-#: src/Admin.php:159
+#: src/Admin.php:215
 msgid "First created user cannot be disabled."
 msgstr "El primer usuario creado no puede ser desactivado."
 
@@ -95,34 +119,34 @@ msgstr ""
 "<strong>Error</strong>: El  usuario está desactivado. Por favor, póngase en "
 "contacto con su administrador para obtener más información."
 
-#: src/User.php:28
+#: src/User.php:32
 msgid "Never"
 msgstr "Nunca"
 
-#: src/User.php:31 src/User.php:45
+#: src/User.php:35 src/User.php:49
 #, php-format
 msgid "%s at %s"
 msgstr "%s a las %s"
 
-#: src/User.php:33 src/User.php:47
+#: src/User.php:37 src/User.php:51
 #, php-format
 msgid "%s ago"
 msgstr "hace %s"
 
-#: src/UserSwitch.php:38 src/UserSwitch.php:161
+#: src/UserSwitch.php:46 src/UserSwitch.php:176
 msgid "Switch to"
 msgstr "Cambiar a"
 
-#: src/UserSwitch.php:82
+#: src/UserSwitch.php:88 src/UserSwitch.php:94
 msgid "You are not allowed to perform this action."
 msgstr "No tienes permisos para realizar esta acción."
 
-#: src/UserSwitch.php:132
+#: src/UserSwitch.php:147
 #, php-format
 msgid "You are logged in as %s."
 msgstr "Estás conectado como %s."
 
-#: src/UserSwitch.php:133 src/UserSwitch.php:204
+#: src/UserSwitch.php:148 src/UserSwitch.php:219
 #, php-format
 msgid "Switch back to %s"
 msgstr "Cambiar de vuelta a %s"
