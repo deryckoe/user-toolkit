@@ -84,6 +84,11 @@ No. WordPress does not have that information. It's introduced with the plugin so
 
 == Changelog ==
 
+= 1.2 =
+* Last Login date is now filterable in User List
+* Added last_login field to Users endpoint
+* Improved the Login Status filter in User List
+
 = 1.1.4 =
 * Fixed and issue that prevents user switching if there is no access to wp-login.php
 
@@ -115,6 +120,11 @@ No. WordPress does not have that information. It's introduced with the plugin so
 * Initial Release
 
 == Upgrade Notice ==
+
+= 1.2 =
+* Last Login date is now filterable in User List
+* Added last_login field to Users endpoint
+* Improved the Login Status filter in User List
 
 = 1.1.4 =
 * Fixed and issue that prevents user switching if there is no access to wp-login.php

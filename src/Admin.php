@@ -41,10 +41,11 @@ class Admin {
 			case 'can_login':
 				$active = USRTK_UserTools()->user( $user_id )->canLogin();
 
-                if ( $user_id === get_current_user_id() || $user_id === 1 ) {
-                    $active_label = ($active === 1) ? __('On', 'user-toolkit') : __('Off', 'user-toolkit');
-                    return '<div class="ut-readonly-toggle" data-active="' . $active . '">' . $active_label .'</div>';
-                }
+				if ( $user_id === get_current_user_id() || $user_id === 1 ) {
+					$active_label = ( $active === 1 ) ? __( 'On', 'user-toolkit' ) : __( 'Off', 'user-toolkit' );
+
+					return '<div class="ut-readonly-toggle" data-active="' . $active . '">' . $active_label . '</div>';
+				}
 
 				return '<div class="ut-toggle" data-active="' . $active . '" data-user-id="' . $user_id . '">
 						    <div class="switch"></div>
@@ -89,9 +90,13 @@ class Admin {
 
 	public function columnFilters() {
 
-		$can_login = isset( $_GET['can_login'] ) ? sanitize_text_field( $_GET['can_login'] ) : '';
+		$can_login  = isset( $_GET['can_login'] ) ? sanitize_text_field( $_GET['can_login'] ) : '';
+		$last_login = isset( $_GET['last_login'] ) ? sanitize_text_field( $_GET['last_login'] ) : 'all-time';
 
-		$all_label = isset( $can_login ) && $can_login !== '-1' ? __( 'All', 'user-toolkit' ) : __( 'Login status', 'user-toolkit' )
+		$can_login_label = ( in_array( $can_login, [
+			'',
+			'-1'
+		] ) ) ? __( 'Login status', 'user-toolkit' ) : __( 'All', 'user-toolkit' );
 
 		?>
 
@@ -100,9 +105,18 @@ class Admin {
                 <label class="screen-reader-text"
                        for="can_login"><?php _e( 'All login status', 'user-toolkit' ) ?></label>
                 <select name="can_login" id="can_login">
-                    <option value="-1"><?php echo $all_label ?></option>
+                    <option value="-1"><?php echo $can_login_label ?></option>
                     <option value="1" <?php selected( $can_login, 1 ) ?>><?php _e( 'Enabled (Active)', 'user-toolkit' ) ?></option>
                     <option value="0"<?php selected( $can_login, 0 ) ?>><?php _e( 'Disabled', 'user-toolkit' ) ?></option>
+                </select>
+                <label class="screen-reader-text"
+                       for="can_login"><?php _e( 'Login date range', 'user-toolkit' ) ?></label>
+                <select name="last_login" id="last_login">
+                    <option value="all-time"><?php _e( 'All Logins', 'user-toolkit' ) ?></option>
+                    <option value="never" <?php selected( $last_login, 'never' ) ?>><?php _e( "Not yet logged in", 'user-toolkit' ) ?></option>
+                    <option value="today" <?php selected( $last_login, 'today' ) ?>><?php _e( "Today's logins", 'user-toolkit' ) ?></option>
+                    <option value="last-30" <?php selected( $last_login, 'last-30' ) ?>><?php _e( 'Last 30 days logins', 'user-toolkit' ) ?></option>
+                    <option value="last-60" <?php selected( $last_login, 'last-60' ) ?>><?php _e( 'Last 60 days logins', 'user-toolkit' ) ?></option>
                 </select>
                 <input type="submit" class="button action" value="<?php _e( 'Filter', 'user-toolkit' ) ?>">
             </form>
@@ -122,19 +136,61 @@ class Admin {
 			return;
 		}
 
+        $meta_query = [];
+
 		$can_login = isset( $_GET['can_login'] ) ? sanitize_text_field( $_GET['can_login'] ) : '';
 
-		if ( ! in_array( $can_login, [ '0', '1' ] ) ) {
-			return;
-		}
+		if ( in_array( $can_login, [ '0', '1' ] ) ) {
 
-		$meta_query = [
-			[
+			$meta_query['relation'] = 'AND';
+			$meta_query[] = [
 				'key'     => 'can_login',
 				'value'   => $can_login,
 				'compare' => '='
-			]
-		];
+			];
+		}
+
+		$last_login = isset( $_GET['last_login'] ) ? sanitize_text_field( $_GET['last_login'] ) : '';
+
+		if ( ! empty( $last_login ) ) {
+			$date_to = strtotime( "tomorrow midnight" );
+
+			if ( $last_login === 'today' ) {
+				$date_from = strtotime( "today midnight" );
+			}
+
+			if ( $last_login === 'last-30' ) {
+				$date_from = strtotime( "-30 days midnight" );
+			}
+
+			if ( $last_login === 'last-60' ) {
+				$date_from = strtotime( "-60 days midnight" );
+			}
+
+			if ( ! empty( $date_from ) ) {
+				$meta_query['relation'] = 'AND';
+				$meta_query[] = [
+					'key'     => 'last_login',
+					'value'   => [ $date_from, $date_to ],
+					'compare' => 'between'
+				];
+
+			}
+
+			if ( $last_login === 'never' ) {
+				$meta_query[] = [
+					'relation' => 'OR',
+					[
+						'key'   => 'last_login',
+						'value' => '',
+					],
+					[
+						'key'   => 'last_login',
+						'compare' => 'NOT EXISTS',
+					]
+				];
+			}
+		}
 
 		$query->set( 'meta_query', $meta_query );
 	}
@@ -143,21 +199,21 @@ class Admin {
 		?>
         <h2><?php _e( 'User Tools', 'user-toolkit' ) ?></h2>
         <table class="form-table">
-	        <?php do_action('usrtk_before_profile_settings', $user ); ?>
+			<?php do_action( 'usrtk_before_profile_settings', $user ); ?>
 			<?php if ( current_user_can( 'edit_user' ) && $user->ID !== get_current_user_id() ) : ?>
                 <tr>
                     <th scope="row"><?php _e( 'Login active', 'user-toolkit' ) ?></th>
                     <td>
                         <div class="time_wrapper">
                             <label for="can_login">
-                                <?php $disabled = ( $user->ID === 1 ) ? ' disabled ' : '' ?>
+								<?php $disabled = ( $user->ID === 1 ) ? ' disabled ' : '' ?>
                                 <input name="can_login" type="checkbox" id="can_login"
-                                       <?php echo $disabled ?>
+									<?php echo $disabled ?>
                                        value="1" <?php checked( USRTK_UserTools()->user( $user->ID )->canLogin(), 1 ) ?>>
 								<?php _e( 'Activate user login', 'user-toolkit' ) ?></label>
-                            <?php if ( $disabled ) : ?>
-                                <p class="description"><?php _e('First created user cannot be disabled.', 'user-toolkit') ?></p>
-                            <?php endif; ?>
+							<?php if ( $disabled ) : ?>
+                                <p class="description"><?php _e( 'First created user cannot be disabled.', 'user-toolkit' ) ?></p>
+							<?php endif; ?>
                         </div>
                     </td>
                 </tr>
@@ -178,7 +234,7 @@ class Admin {
                     </div>
                 </td>
             </tr>
-            <?php do_action('usrtk_after_profile_settings', $user ); ?>
+			<?php do_action( 'usrtk_after_profile_settings', $user ); ?>
         </table>
 		<?php
 	}
@@ -190,9 +246,9 @@ class Admin {
 
 		$can_login = isset( $_POST['can_login'] ) ? sanitize_text_field( $_POST['can_login'] ) : '0';
 
-        if ( $user_id === 1 || $user_id === get_current_user_id() ) {
-            $can_login = '1';
-        }
+		if ( $user_id === 1 || $user_id === get_current_user_id() ) {
+			$can_login = '1';
+		}
 
 		if ( ! in_array( $can_login, [ '0', '1' ] ) ) {
 			return false;
