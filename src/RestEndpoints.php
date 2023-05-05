@@ -11,6 +11,8 @@ class RestEndpoints {
 	public function actions() {
 		add_action( 'rest_api_init', [ $this, 'registerCanLoginField' ] );
 		add_action( 'rest_api_init', [ $this, 'registerLastLoginField' ] );
+		add_filter( 'rest_user_collection_params', [ $this, 'registerParams' ] );
+		add_filter( 'rest_user_query', [ $this, 'filterByParams' ], 10, 2 );
 	}
 
 
@@ -73,6 +75,41 @@ class RestEndpoints {
 				]
 			]
 		);
+	}
+
+	public function registerParams( $params ) {
+		$params['last_login']   = [
+			'description' => 'Last login range',
+			'type'        => 'string',
+		];
+
+		return $params;
+	}
+
+	public function filterByParams( $prepared_args, \WP_REST_Request $request ) {
+		$last_login = $request->get_param( 'last_login' );
+		if ( ! empty( $last_login ) ) {
+
+			$last_login_range = explode( ',', $last_login );
+
+			if ( count( $last_login_range ) === 1 ) {
+				$last_login_range[1] = date( 'Y-m-d\TH:i:s', strtotime( 'now' ) );
+			}
+
+			$last_login_args = array_map( function ( $date ) {
+				return strtotime( $date );
+			}, $last_login_range );
+
+			$prepared_args['meta_query'] = [
+				[
+					'key'     => 'last_login',
+					'value'   => $last_login_args,
+					'compare' => 'BETWEEN',
+				],
+			];
+		}
+
+		return $prepared_args;
 	}
 
 

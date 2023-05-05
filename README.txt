@@ -1,11 +1,11 @@
 === User Toolkit ===
 Contributors: deryck
-Donate link: http://deryckoe.com/user-toolkit
+Donate link: https://www.paypal.com/donate/?hosted_button_id=XHK37YBVVMP58
 Tags: user profile, last login, disable user, registration date
 Requires at least: 5.9.5
-Tested up to: 6.1
+Tested up to: 6.2
 Requires PHP: 7.3
-Stable tag: 1.2
+Stable tag: 1.2.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -30,6 +30,11 @@ Implements the nonce security system in WordPress, meaning only those who intend
 Full support for user session validation where appropriate.
 Full support for administration over SSL (if applicable).
 
+** REST API Support **
+
+The field last_login is included as a result in endpoint wp/v2/users/.
+Filtering the endpoint wp/v2/users/ using parameter last_login is also supported.
+
 ## USAGE
 
 **Disable user**
@@ -51,6 +56,10 @@ Full support for administration over SSL (if applicable).
 1. Visit the Users menu in WordPress and you will see a "Last Login", "Registered" and "ID" columns by default in the list of each user.
 2. Disable all or any column clicking "Screen Options" on the right top corner of the screen.
 
+** Retrieve Last Login info using REST API **
+
+1. Get last_login field with ISO 8601 form on endpoint wp/v2/users/
+2. Filter using parameter last_login using the following options wp/v2/users/?last_login=FROM,[TO:optional] using ISO 8601 or Y-m-d format.
 
 ## PRIVACY STATEMENT
 
@@ -83,6 +92,9 @@ No. WordPress does not have that information. It's introduced with the plugin so
 3. Login status, registration and last login dates in user profile.
 
 == Changelog ==
+
+= 1.2.1 =
+* Added last_login as a filter parameter in user endpoint.
 
 = 1.2 =
 * Last Login date is now filterable in User List
@@ -120,6 +132,9 @@ No. WordPress does not have that information. It's introduced with the plugin so
 * Initial Release
 
 == Upgrade Notice ==
+
+= 1.2.1 =
+* Added last_login as a filter parameter in user endpoint.
 
 = 1.2 =
 * Last Login date is now filterable in User List
