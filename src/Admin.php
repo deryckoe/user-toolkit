@@ -48,7 +48,7 @@ class Admin {
 				}
 
 				return '<div class="ut-toggle" data-active="' . $active . '" data-user-id="' . $user_id . '">
-						    <div class="switch"></div>
+						    <div class="ut-switch"></div>
 					    </div>';
 
 			case 'registered':

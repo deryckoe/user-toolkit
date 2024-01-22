@@ -18,7 +18,7 @@
   background-color: #f0f0f0;
   transition: all 600ms ease-in-out;
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-start;
 
   &:hover {
     background-color: #f6f6f6;
@@ -27,14 +27,14 @@
 
   &[data-active="1"] {
     background-color: #6397d7;
-    justify-content: flex-start;
+    justify-content: flex-end;
   }
 
-  &[data-active="1"] .switch {
+  &[data-active="1"] .ut-switch {
     border-color: #6397d7;
   }
 
-  .switch {
+  .ut-switch {
     width: 14px;
     height: 14px;
     border: 1px solid #dedede;
@@ -83,6 +83,7 @@
   border: 1px solid #bfbebe;
   border-radius: 6px;
   margin: 5px;
+  z-index: 9999999999;
 
   p {
     margin: 0;

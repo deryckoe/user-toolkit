@@ -3,9 +3,9 @@ Contributors: deryck
 Donate link: https://www.paypal.com/donate/?hosted_button_id=XHK37YBVVMP58
 Tags: user profile, last login, disable user, registration date
 Requires at least: 5.9.5
-Tested up to: 6.2
+Tested up to: 6.4
 Requires PHP: 7.3
-Stable tag: 1.2.1
+Stable tag: 1.2.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -93,6 +93,11 @@ No. WordPress does not have that information. It's introduced with the plugin so
 
 == Changelog ==
 
+= 1.2.2 =
+* Fixed the user switch. Now is on left when disabled, and in right when enabled.
+* Fixed broken styles on use switch when other plugins are installed.
+* User "switch info" widget is displayed on top of everything, on client view.
+
 = 1.2.1 =
 * Added last_login as a filter parameter in user endpoint.
 
@@ -132,6 +137,11 @@ No. WordPress does not have that information. It's introduced with the plugin so
 * Initial Release
 
 == Upgrade Notice ==
+
+= 1.2.2 =
+* Fixed the user switch. Now is on left when disabled, and in right when enabled.
+* Fixed broken styles on use switch when other plugins are installed.
+* User "switch info" widget is displayed on top of everything, on client view.
 
 = 1.2.1 =
 * Added last_login as a filter parameter in user endpoint.
