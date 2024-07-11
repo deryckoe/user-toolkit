@@ -75,22 +75,24 @@
 
 #switch_back_user {
   position: fixed;
-  right: 0;
+  right: clamp(0px, 5vw, 30px);
   bottom: 0;
   background: #e2e2e2;
   padding: 5px 10px;
   font-size: 14px;
   border: 1px solid #bfbebe;
-  border-radius: 6px;
+  border-radius: 4px;
   margin: 5px;
   z-index: 9999999999;
 
   p {
     margin: 0;
     padding: 0;
+    color: #333;
   }
 
   a {
     font-weight: 700;
+    color: #1a72e0;
   }
 }

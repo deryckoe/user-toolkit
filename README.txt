@@ -3,9 +3,9 @@ Contributors: deryck
 Donate link: https://www.paypal.com/donate/?hosted_button_id=XHK37YBVVMP58
 Tags: user profile, last login, disable user, registration date
 Requires at least: 5.9.5
-Tested up to: 6.4
+Tested up to: 6.6
 Requires PHP: 7.3
-Stable tag: 1.2.2
+Stable tag: 1.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -93,6 +93,9 @@ No. WordPress does not have that information. It's introduced with the plugin so
 
 == Changelog ==
 
+= 1.2.3 =
+* Fixed styles for switch to previous user modal box
+
 = 1.2.2 =
 * Fixed the user switch. Now is on left when disabled, and in right when enabled.
 * Fixed broken styles on use switch when other plugins are installed.
@@ -137,6 +140,9 @@ No. WordPress does not have that information. It's introduced with the plugin so
 * Initial Release
 
 == Upgrade Notice ==
+
+= 1.2.3 =
+* Fixed styles for switch to previous user modal box
 
 = 1.2.2 =
 * Fixed the user switch. Now is on left when disabled, and in right when enabled.
