@@ -4,8 +4,8 @@ Donate link: https://www.paypal.com/donate/?hosted_button_id=XHK37YBVVMP58
 Tags: user profile, last login, disable user, registration date
 Requires at least: 5.9.5
 Tested up to: 6.6
-Requires PHP: 7.3
-Stable tag: 1.3
+Requires PHP: 7.4
+Stable tag: 1.2.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -63,10 +63,12 @@ Filtering the endpoint wp/v2/users/ using parameter last_login is also supported
 
 ## PRIVACY STATEMENT
 
-This plugin makes use of browser cookies in order to allow users to switch to another account. Its cookies operate using the same mechanism as the authentication cookies in WordPress core, which means their values contain the user’s user_login field in plain text which should be treated as potentially personally identifiable information (PII) for privacy and regulatory reasons (GDPR, CCPA, etc). . The names of the cookies are:
+This plugin makes use of a single browser cookie in order to allow users to switch between accounts. The cookie contains only a secure reference hash and does not store any personally identifiable information (PII). The actual user data is stored securely on the server using WordPress transients.
 
-* wp_usrtk_user_from_{COOKIEHASH}
-* wp_usrtk_user_switched_{COOKIEHASH}
+The cookie name is:
+* wp_usrtk_user_switch_ref
+
+This implementation ensures that no user data or PII is exposed in the browser cookies, making it more secure and privacy-friendly. The cookie is set with HTTP-only flag, secure flag (when HTTPS is in use), and SameSite=Strict for enhanced security. The cookie expires after 24 hours or when the user switches back to their original account.
 
 == Installation ==
 
@@ -92,6 +94,13 @@ No. WordPress does not have that information. It's introduced with the plugin so
 3. Login status, registration and last login dates in user profile.
 
 == Changelog ==
+
+= 1.2.4 =
+* Security: Improved user switching mechanism with more secure cookie handling
+* Security: Removed personally identifiable information from cookies
+* Security: Added SameSite cookie attribute for enhanced security
+* Security: Improved validation of user switching process
+* Added PHP 7.4 as minimum required version
 
 = 1.2.3 =
 * Fixed styles for switch to previous user modal box
@@ -140,6 +149,9 @@ No. WordPress does not have that information. It's introduced with the plugin so
 * Initial Release
 
 == Upgrade Notice ==
+
+= 1.2.4 =
+* Security update: Improves user switching security and cookie handling. Requires PHP 7.4 or higher. Update recommended.
 
 = 1.2.3 =
 * Fixed styles for switch to previous user modal box
