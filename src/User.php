@@ -32,8 +32,10 @@ class User {
 		$last_login = __( 'Never', 'user-toolkit' );
 
 		if ( ! empty( $last_login_timestamp ) ) {
-			$last_login = '<span class="time_formatted">' . sprintf( __( '%s at %s', 'user-toolkit' ), $date, $time ) . '</span>';
+			/* translators: 1: Date (e.g. January 1, 2024), 2: Time (e.g. 12:00 PM) */
+			$last_login = '<span class="time_formatted">' . sprintf( __( '%1$s at %2$s', 'user-toolkit' ), $date, $time ) . '</span>';
 			$human      = human_time_diff( $last_login_timestamp, current_time( 'timestamp', true ) );
+			/* translators: %s: Human-readable time difference (e.g. "2 hours", "3 days", "1 month") */
 			$last_login .= '<br><span class="time_diff">' . sprintf( __( '%s ago', 'user-toolkit' ), $human ) . '</span>';
 		}
 
@@ -48,16 +50,18 @@ class User {
 
 		$registered = wp_kses_post(
 			sprintf(
-				'<span class="time_formatted">' . esc_html__( '%s at %s', 'user-toolkit' ) . '</span>',
-				esc_html($date),
-				esc_html($time)
+			/* translators: 1: Date (e.g. January 1, 2024), 2: Time (e.g. 12:00 PM) */
+				'<span class="time_formatted">' . esc_html__( '%1$s at %2$s', 'user-toolkit' ) . '</span>',
+				esc_html( $date ),
+				esc_html( $time )
 			)
 		);
 		$human      = human_time_diff( strtotime( $user->user_registered ), current_time( 'timestamp', true ) );
 		$registered .= wp_kses_post(
 			sprintf(
+			/* translators: %s: Human-readable time difference (e.g. "2 hours", "3 days", "1 month") */
 				'<br><span class="time_diff">' . esc_html__( '%s ago', 'user-toolkit' ) . '</span>',
-				esc_html($human)
+				esc_html( $human )
 			)
 		);
 

@@ -243,11 +243,13 @@ class UserSwitch {
 		$user           = wp_get_current_user();
 
 		$message = sprintf(
-			__( 'You are logged in as %s.', 'user-toolkit' ),
+		/* translators: %s: Original user's display name */
+		__( 'You are logged in as %s.', 'user-toolkit' ),
 			USRTK_UserTools()->user( $user->ID )->displayName()
 		);
 		$message .= ' <a href="' . esc_url( $safe_login_url ) . '">' .
 		            sprintf(
+		            /* translators: %s: Current user's display name */
 			            __( 'Switch back to %s', 'user-toolkit' ),
 			            USRTK_UserTools()->user( $user_from->ID )->displayName()
 		            ) . '</a>.';
@@ -288,7 +290,8 @@ class UserSwitch {
 			'parent' => 'user-actions',
 			'id'     => 'restore-user',
 			'title'  => sprintf(
-				__( 'Switch back to %s', 'user-toolkit' ),
+			/* translators: %s: Original user's display name */
+			__( 'Switch back to %s', 'user-toolkit' ),
 				USRTK_UserTools()->user( $user_from->ID )->displayName()
 			),
 			'href'   => $safe_login_url,
