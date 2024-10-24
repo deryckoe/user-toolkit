@@ -122,7 +122,7 @@ class UserSwitch {
 
 	private function clearSwitchData( $switch_key = null ) {
 		if ( $switch_key === null && isset( $_COOKIE[ $this->cookie_name ] ) ) {
-			$switch_key = sanitize_text_field( $_COOKIE[ $this->cookie_name ] );
+			$switch_key = sanitize_text_field( wp_unslash( $_COOKIE[ $this->cookie_name ] ) );
 		}
 
 		if ( $switch_key ) {
