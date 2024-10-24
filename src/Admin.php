@@ -88,8 +88,16 @@ class Admin {
 	}
 
 	public function columnFilters() {
-		$can_login  = isset( $_GET['can_login'] ) ? sanitize_text_field( wp_unslash( $_GET['can_login'] ) ) : '';
-		$last_login = isset( $_GET['last_login'] ) ? sanitize_text_field( wp_unslash( $_GET['last_login'] ) ) : 'all-time';
+
+		if ( ! isset( $_REQUEST['_nonce_user_toolkit_filter'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_REQUEST['_nonce_user_toolkit_filter'] ) ), 'user_toolkit_filter' ) ) {
+			$can_login  = '';
+			$last_login = 'all-time';
+		} else {
+
+			$can_login  = isset( $_GET['can_login'] ) ? sanitize_text_field( wp_unslash( $_GET['can_login'] ) ) : '';
+			$last_login = isset( $_GET['last_login'] ) ? sanitize_text_field( wp_unslash( $_GET['last_login'] ) ) : 'all-time';
+		}
+
 
 		$can_login_label = ( in_array( $can_login, [
 			'',
@@ -98,7 +106,7 @@ class Admin {
 		?>
         <div class="alignleft actions">
             <form method="get">
-				<?php wp_nonce_field( 'user_toolkit_filter' ); ?>
+				<?php wp_nonce_field( 'user_toolkit_filter', '_nonce_user_toolkit_filter' ); ?>
                 <label class="screen-reader-text"
                        for="can_login"><?php esc_html_e( 'All login status', 'user-toolkit' ) ?></label>
                 <select name="can_login" id="can_login">
@@ -123,6 +131,10 @@ class Admin {
 
 	public function filterColumns( $query ): void {
 		if ( ! is_admin() ) {
+			return;
+		}
+
+		if ( ! isset( $_REQUEST['_nonce_user_toolkit_filter'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_REQUEST['_nonce_user_toolkit_filter'] ) ), 'user_toolkit_filter' ) ) {
 			return;
 		}
 
