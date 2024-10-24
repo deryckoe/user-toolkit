@@ -55,7 +55,7 @@ class RestEndpoints {
 				'get_callback'    => function ( $user ) {
 					$epoch_date = get_user_meta( $user['id'], 'last_login', true );
 
-					return ( ! empty( $epoch_date ) ) ? date( 'c', $epoch_date ) : null;
+					return ( ! empty( $epoch_date ) ) ? gmdate( 'c', $epoch_date ) : null;
 				},
 				'update_callback' => function ( $value, $user, $field_name ) {
 					$epoch_date = strtotime( $value );
@@ -93,7 +93,7 @@ class RestEndpoints {
 			$last_login_range = explode( ',', $last_login );
 
 			if ( count( $last_login_range ) === 1 ) {
-				$last_login_range[1] = date( 'Y-m-d\TH:i:s', strtotime( 'now' ) );
+				$last_login_range[1] = gmdate( 'Y-m-d\TH:i:s', strtotime( 'now' ) );
 			}
 
 			$last_login_args = array_map( function ( $date ) {
