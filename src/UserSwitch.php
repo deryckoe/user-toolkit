@@ -244,7 +244,7 @@ class UserSwitch {
 
 		$message = sprintf(
 		/* translators: %s: Original user's display name */
-		__( 'You are logged in as %s.', 'user-toolkit' ),
+			__( 'You are logged in as %s.', 'user-toolkit' ),
 			USRTK_UserTools()->user( $user->ID )->displayName()
 		);
 		$message .= ' <a href="' . esc_url( $safe_login_url ) . '">' .
@@ -291,7 +291,7 @@ class UserSwitch {
 			'id'     => 'restore-user',
 			'title'  => sprintf(
 			/* translators: %s: Original user's display name */
-			__( 'Switch back to %s', 'user-toolkit' ),
+				__( 'Switch back to %s', 'user-toolkit' ),
 				USRTK_UserTools()->user( $user_from->ID )->displayName()
 			),
 			'href'   => $safe_login_url,
