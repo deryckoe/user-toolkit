@@ -104,7 +104,7 @@ class UserSwitch {
 			return false;
 		}
 
-		$switch_key = sanitize_text_field( $_COOKIE[ $this->cookie_name ] );
+		$switch_key = sanitize_text_field( wp_unslash( $_COOKIE[ $this->cookie_name ] ) );
 		if ( empty( $switch_key ) ) {
 			return false;
 		}
@@ -165,46 +165,46 @@ class UserSwitch {
 	}
 
 	public function switchUser() {
-		$action = isset( $_GET['action'] ) ? sanitize_text_field( $_GET['action'] ) : false;
+		$action = isset( $_GET['action'] ) ? sanitize_text_field( wp_unslash( $_GET['action'] ) ) : false;
 
 		if ( ! $action || ! in_array( $action, [ 'switch_user', 'restore_user' ] ) ) {
 			return;
 		}
 
-		if ( ! isset( $_GET['_wpnonce'] ) || ! wp_verify_nonce( $_GET['_wpnonce'], 'switch_user' ) ) {
-			wp_die( __( 'Invalid security token sent.', 'user-toolkit' ) );
+		if ( ! isset( $_GET['_wpnonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET['_wpnonce'] ) ), 'switch_user' ) ) {
+			wp_die( esc_html__( 'Invalid security token sent.', 'user-toolkit' ) );
 		}
 
 		$user_id      = isset( $_GET['user_id'] ) ? intval( $_GET['user_id'] ) : 0;
 		$user_from_id = isset( $_GET['user_from'] ) ? intval( $_GET['user_from'] ) : 0;
 
 		if ( ! $user_id || ! $user_from_id ) {
-			wp_die( __( 'Invalid user ID.', 'user-toolkit' ) );
+			wp_die( esc_html__( 'Invalid user ID.', 'user-toolkit' ) );
 		}
 
 		$user = get_user_by( 'id', $user_id );
 		if ( ! $user ) {
-			wp_die( __( 'Invalid user.', 'user-toolkit' ) );
+			wp_die( esc_html__( 'Invalid user.', 'user-toolkit' ) );
 		}
 
 		if ( $action === 'restore_user' ) {
 			$switch_data = $this->getSwitchData();
 			if ( ! $switch_data ) {
-				wp_die( __( 'Switch data not found.', 'user-toolkit' ) );
+				wp_die( esc_html__( 'Switch data not found.', 'user-toolkit' ) );
 			}
 
 			if ( $switch_data['user_to_id'] !== get_current_user_id() ) {
-				wp_die( __( 'Invalid switch back attempt.', 'user-toolkit' ) );
+				wp_die( esc_html__( 'Invalid switch back attempt.', 'user-toolkit' ) );
 			}
 
 			if ( $switch_data['user_from_id'] !== $user_id ) {
-				wp_die( __( 'Invalid switch back target.', 'user-toolkit' ) );
+				wp_die( esc_html__( 'Invalid switch back target.', 'user-toolkit' ) );
 			}
 		}
 
 		if ( $action === 'switch_user' ) {
 			if ( ! current_user_can( 'remove_users' ) && ! current_user_can( 'manage_network_users' ) ) {
-				wp_die( __( 'You do not have permission to switch users.', 'user-toolkit' ) );
+				wp_die( esc_html__( 'You do not have permission to switch users.', 'user-toolkit' ) );
 			}
 
 			$this->storeSwitchData( get_current_user_id(), $user_id );
