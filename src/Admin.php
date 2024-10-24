@@ -87,25 +87,24 @@ class Admin {
 		}
 	}
 
-	public function columnFilters() {
+	public function columnFilters( $which ) {
 
-		if ( ! isset( $_REQUEST['_nonce_user_toolkit_filter'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_REQUEST['_nonce_user_toolkit_filter'] ) ), 'user_toolkit_filter' ) ) {
-			$can_login  = '';
-			$last_login = 'all-time';
-		} else {
+		if ( $which === 'top' ) {
 
-			$can_login  = isset( $_GET['can_login'] ) ? sanitize_text_field( wp_unslash( $_GET['can_login'] ) ) : '';
-			$last_login = isset( $_GET['last_login'] ) ? sanitize_text_field( wp_unslash( $_GET['last_login'] ) ) : 'all-time';
-		}
+			if ( ! isset( $_REQUEST['_nonce_user_toolkit_filter'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_REQUEST['_nonce_user_toolkit_filter'] ) ), 'user_toolkit_filter' ) ) {
+				$can_login  = '';
+				$last_login = 'all-time';
+			} else {
+				$can_login  = isset( $_GET['can_login'] ) ? sanitize_text_field( wp_unslash( $_GET['can_login'] ) ) : '';
+				$last_login = isset( $_GET['last_login'] ) ? sanitize_text_field( wp_unslash( $_GET['last_login'] ) ) : 'all-time';
+			}
 
-
-		$can_login_label = ( in_array( $can_login, [
-			'',
-			'-1'
-		] ) ) ? __( 'Login status', 'user-toolkit' ) : __( 'All', 'user-toolkit' );
-		?>
-        <div class="alignleft actions">
-            <form method="get">
+			$can_login_label = ( in_array( $can_login, [
+				'',
+				'-1'
+			] ) ) ? __( 'Login status', 'user-toolkit' ) : __( 'All', 'user-toolkit' );
+			?>
+            <div class="alignleft actions">
 				<?php wp_nonce_field( 'user_toolkit_filter', '_nonce_user_toolkit_filter' ); ?>
                 <label class="screen-reader-text"
                        for="can_login"><?php esc_html_e( 'All login status', 'user-toolkit' ) ?></label>
@@ -124,17 +123,14 @@ class Admin {
                     <option value="last-60" <?php selected( $last_login, 'last-60' ) ?>><?php esc_html_e( 'Last 60 days logins', 'user-toolkit' ) ?></option>
                 </select>
                 <input type="submit" class="button action" value="<?php esc_html_e( 'Filter', 'user-toolkit' ) ?>">
-            </form>
-        </div>
-		<?php
+
+            </div>
+			<?php
+		}
 	}
 
 	public function filterColumns( $query ): void {
 		if ( ! is_admin() ) {
-			return;
-		}
-
-		if ( ! isset( $_REQUEST['_nonce_user_toolkit_filter'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_REQUEST['_nonce_user_toolkit_filter'] ) ), 'user_toolkit_filter' ) ) {
 			return;
 		}
 
@@ -144,7 +140,12 @@ class Admin {
 			return;
 		}
 
-		$meta_query = [];
+		if ( ! isset( $_REQUEST['_nonce_user_toolkit_filter'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_REQUEST['_nonce_user_toolkit_filter'] ) ), 'user_toolkit_filter' ) ) {
+			return;
+		}
+
+
+		$meta_query = $query->get( 'meta_query' ) ?: [];
 
 		$can_login = isset( $_GET['can_login'] ) ? sanitize_text_field( wp_unslash( $_GET['can_login'] ) ) : '';
 
@@ -199,6 +200,7 @@ class Admin {
 		}
 
 		$query->set( 'meta_query', $meta_query );
+
 	}
 
 	public function userProfileFields( $user ) {
