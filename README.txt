@@ -30,7 +30,7 @@ Implements the nonce security system in WordPress, meaning only those who intend
 Full support for user session validation where appropriate.
 Full support for administration over SSL (if applicable).
 
-** REST API Support **
+**REST API Support**
 
 The field last_login is included as a result in endpoint wp/v2/users/.
 Filtering the endpoint wp/v2/users/ using parameter last_login is also supported.
@@ -56,7 +56,7 @@ Filtering the endpoint wp/v2/users/ using parameter last_login is also supported
 1. Visit the Users menu in WordPress and you will see a "Last Login", "Registered" and "ID" columns by default in the list of each user.
 2. Disable all or any column clicking "Screen Options" on the right top corner of the screen.
 
-** Retrieve Last Login info using REST API **
+**Retrieve Last Login info using REST API**
 
 1. Get last_login field with ISO 8601 form on endpoint wp/v2/users/
 2. Filter using parameter last_login using the following options wp/v2/users/?last_login=FROM,[TO:optional] using ISO 8601 or Y-m-d format.
@@ -65,8 +65,7 @@ Filtering the endpoint wp/v2/users/ using parameter last_login is also supported
 
 This plugin makes use of a single browser cookie in order to allow users to switch between accounts. The cookie contains only a secure reference hash and does not store any personally identifiable information (PII). The actual user data is stored securely on the server using WordPress transients.
 
-The cookie name is:
-* wp_usrtk_user_switch_ref
+The cookie name is: **wp_usrtk_user_switch_ref**
 
 This implementation ensures that no user data or PII is exposed in the browser cookies, making it more secure and privacy-friendly. The cookie is set with HTTP-only flag, secure flag (when HTTPS is in use), and SameSite=Strict for enhanced security. The cookie expires after 24 hours or when the user switches back to their original account.
 
