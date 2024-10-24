@@ -209,7 +209,7 @@ class Admin {
                 <th scope="row"><label><?php esc_html_e('Registered', 'user-toolkit') ?></label></th>
                 <td>
                     <div class="time_wrapper">
-						<?php echo USRTK_UserTools()->user($user->ID)->registered(); ?>
+						<?php echo wp_kses_post( USRTK_UserTools()->user($user->ID)->registered() ); ?>
                     </div>
                 </td>
             </tr>
@@ -217,7 +217,7 @@ class Admin {
                 <th scope="row"><label><?php esc_html_e('Last login', 'user-toolkit') ?></label></th>
                 <td>
                     <div class="time_wrapper">
-						<?php echo USRTK_UserTools()->user($user->ID)->lastLogin(); ?>
+						<?php echo wp_kses_post( USRTK_UserTools()->user($user->ID)->lastLogin() ); ?>
                     </div>
                 </td>
             </tr>

@@ -46,9 +46,20 @@ class User {
 		$date = wp_date( USRTK_DATE_FORMAT, strtotime( $user->user_registered ), wp_timezone() );
 		$time = wp_date( USRTK_TIME_FORMAT, strtotime( $user->user_registered ), wp_timezone() );
 
-		$registered = '<span class="time_formatted">' . sprintf( __( '%s at %s', 'user-toolkit' ), $date, $time ) . '</span>';
+		$registered = wp_kses_post(
+			sprintf(
+				'<span class="time_formatted">' . esc_html__( '%s at %s', 'user-toolkit' ) . '</span>',
+				esc_html($date),
+				esc_html($time)
+			)
+		);
 		$human      = human_time_diff( strtotime( $user->user_registered ), current_time( 'timestamp', true ) );
-		$registered .= '<br><span class="time_diff">' . sprintf( __( '%s ago', 'user-toolkit' ), $human ) . '</span>';
+		$registered .= wp_kses_post(
+			sprintf(
+				'<br><span class="time_diff">' . esc_html__( '%s ago', 'user-toolkit' ) . '</span>',
+				esc_html($human)
+			)
+		);
 
 		return $registered;
 	}
